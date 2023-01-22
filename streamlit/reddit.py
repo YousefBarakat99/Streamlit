@@ -3,6 +3,7 @@ import pandas as pd
 from bs4 import BeautifulSoup
 import re
 import http.client
+import config
 
 board = st.radio('Which reddit board would you like to discover?', ['JoeRogan', 'ksi', 'Sidemen', 
 'Damnthatsinteresting', 'marvelstudios'])
@@ -12,7 +13,7 @@ select = st.selectbox('Select section', ['new', 'rising', 'top', 'controversial'
 
 
 conn = http.client.HTTPSConnection("api.scrapingant.com")
-conn.request("GET", f"/v2/general?url=https%3A%2F%2Fold.reddit.com/r/{board}/{select}/&x-api-key=23821eb317594e78a63979025927cf12")
+conn.request("GET", f"/v2/general?url=https%3A%2F%2Fold.reddit.com/r/{board}/{select}/&x-api-key={config.APIKEY}")
 res = conn.getresponse()
 data = res.read()
 
