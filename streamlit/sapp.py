@@ -161,7 +161,9 @@ def complete():
     else:
         st.success(f'There are a total of {df1["Price (HUF)"].count()} properties that match your description!')
         st.dataframe(df1)
-
+    if st.button('Reset'):
+        st.experimental_rerun()
+        
 page_names_to_funcs = {
     "—": intro,
     "General info": general,
