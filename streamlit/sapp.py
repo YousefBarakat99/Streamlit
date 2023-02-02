@@ -18,9 +18,19 @@ def intro():
         ### 🌱 I am currently working on:
         - Learning Data Analysis and Visualization using Python, SQL, Excel, [Tableau](https://public.tableau.com/app/profile/yousef.barakat)
         - Expanding my [Portfolio](https://github.com/YousefBarakat99/My_Portfolio)
+
+        &nbsp;
+        ### :books: Libraries used:
+        - Pandas
+        - Numpy
+        - Matplotlib
+        - Selenium
+        - Beautifulsoup4
+        - Streamlit
+        - Seaborn
         
         &nbsp;
-        ### :mailbox_with_mail: Where you can find me:
+        ### :mailbox_with_mail: Where you could find me:
         [<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/LinkedIn_Logo.svg/2560px-LinkedIn_Logo.svg.png" width="150"/>](https://www.linkedin.com/in/yousef-barakat-019816205/)
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<img src="https://cdn-icons-png.flaticon.com/512/3037/3037366.png" height="40"/>](https://yousefbarakat99.github.io/website/)
         
@@ -118,4 +128,3 @@ page_names_to_funcs = {
 
 demo_name = st.sidebar.selectbox("Choose a page", page_names_to_funcs.keys())
 page_names_to_funcs[demo_name]()
-
