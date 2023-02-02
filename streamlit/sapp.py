@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-df = pd.read_excel('Houses_Cleaned.xlsx')
+df = pd.read_excel('streamlit/Houses_Cleaned.xlsx')
 def intro():
     import streamlit as st
 
