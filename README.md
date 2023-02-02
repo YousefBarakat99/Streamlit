@@ -1,2 +1,2 @@
 # Streamlit
-Simple Reddit web-scraping app.
+A simple property web-scraping app.
