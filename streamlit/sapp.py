@@ -1,5 +1,7 @@
 import streamlit as st
+from dataframe import dfo
 
+df = dfo
 def intro():
     import streamlit as st
 
@@ -45,7 +47,6 @@ def general():
     import matplotlib.pyplot as plt
 
     st.subheader('General property info')
-    df = pd.read_excel('Houses_Cleaned.xlsx')
     st.dataframe(df.sort_values(['Rooms', 'Price (HUF)']).reset_index(drop=True))
     count = df['Price (HUF)'].count()
     ravg = np.mean(df['Rooms']).round(1)
@@ -80,7 +81,6 @@ def rooms_ft():
 
     st.write('Filter by rooms')
     rooms = st.radio('Number of rooms', ('1', '2', '3', '>3'))
-    df = pd.read_excel('Houses_Cleaned.xlsx')
     if rooms == '1':
         st.dataframe(df[df['Rooms'] == 1].sort_values('Price (HUF)').reset_index(drop=True))
         df1 = df[(df['Rooms'] == 1) & (df['Price (HUF)'] > 50_000) & (df['Size (m2)'].notna())].sort_values('Price (HUF)').reset_index(drop=True)
@@ -128,3 +128,4 @@ page_names_to_funcs = {
 
 demo_name = st.sidebar.selectbox("Choose a page", page_names_to_funcs.keys())
 page_names_to_funcs[demo_name]()
+
