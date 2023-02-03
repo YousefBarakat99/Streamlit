@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 
 df = pd.read_excel('streamlit/Houses_Cleaned.xlsx')
+df = df[df['Price (HUF)' >= 45_000]]
 df['Address'] = df['Address'].fillna('Address unavailable')
 
 def intro():
