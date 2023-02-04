@@ -156,7 +156,7 @@ def complete():
         mins, maxs = st.select_slider('''Select size range''', df['Size (m2)'].dropna().sort_values(), (df['Size (m2)'].min(), df['Size (m2)'].max()), key='size')
     else:
         mins, maxs = df['Size (m2)'].dropna().min(), df['Size (m2)'].dropna().max()
-    df1 = df[(df['Rooms'] <= (num)) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) & (df['Size (m2)'] <= maxs) & ((df['Size (m2)'] >= mins))].sort_values('Rooms').reset_index(drop=True)
+    df1 = df[(df['Rooms'] <= (num)) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) & (df['Size (m2)'] <= maxs) & ((df['Size (m2)'] >= mins))].sort_values('Rooms', asc=FALSE).reset_index(drop=True)
     if len(df1) == 0:
         st.error('There no properties that match your description.')
     else:
