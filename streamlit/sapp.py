@@ -149,7 +149,7 @@ def complete():
     if rentee == 'With others':
         num = st.number_input('How many others?', 1, df['Rooms'].max() - 1, key='people') + 1
     else:
-        num = 1
+        num = 2
     
     sizes = st.radio('''Any size in mind?''', ('''Doesn't matter''', '''I have a size in mind'''), key='s_choice')
     if sizes == 'I have a size in mind':
