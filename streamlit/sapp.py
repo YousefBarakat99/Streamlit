@@ -147,9 +147,9 @@ def complete():
     minp, maxp = st.select_slider('''Most importantly, what's your price range? (in HUF)''', df['Price (HUF)'].sort_values(), (df['Price (HUF)'].min(), df['Price (HUF)'].max()), key='price_select')
     rentee = st.radio('Are you moving in alone or with others?', ('Alone', 'With others'), key='choice')
     if rentee == 'With others':
-        num = st.number_input('How many others?', 1, 4, key='people')
+        num = st.number_input('How many others?', 1, 4, key='people') + 1
     else:
-        num = 0
+        num = 1
     
     sizes = st.radio('''Any size in mind?''', ('''Doesn't matter''', '''I have a size in mind'''), key='s_choice')
     if sizes == 'I have a size in mind':
