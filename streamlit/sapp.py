@@ -14,7 +14,7 @@ from json import load
 #         exec(source, globals(), locals())
 
 #* Sending data to streamlit
-df = pd.read_excel("streamlit/Houses_Cleaned.xlsx")
+df = pd.read_excel('Houses_Cleaned.xlsx')
 df['Address'] = df['Address'].fillna('Address unavailable')
 
 def intro():
@@ -61,23 +61,6 @@ def general():
     import matplotlib.pyplot as plt
     import plotly.express as px
     st.subheader('General property info')
-    
-    updated = st.button('Fetch latest properties')
-    if updated:
-        exec(open("scraping.py").read())
-
-        filename = 'housesTRIALcleaning.ipynb'
-        with open(filename) as fp:
-            nb = load(fp)
-
-        for cell in nb['cells']:
-            if cell['cell_type'] == 'code':
-                source = ''.join(line for line in cell['source'] if not line.startswith('%'))
-                exec(source, globals(), locals())
-        df = pd.read_excel('Houses_Cleaned.xlsx')
-        df['Address'] = df['Address'].fillna('Address unavailable') 
-    else:
-        df = pd.read_excel('Houses_Cleaned.xlsx')
     st.dataframe(df.sort_values(['Rooms', 'Price (HUF)']).reset_index(drop=True))    
     count = df['Price (HUF)'].count()
     ravg = np.mean(df['Rooms']).round(1)
