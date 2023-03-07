@@ -60,8 +60,6 @@ def general():
     import seaborn as sns
     import matplotlib.pyplot as plt
     import plotly.express as px
-    sns.set_palette('bright')
-    sns.set_style('whitegrid')
     st.subheader('General property info')
     st.dataframe(df.sort_values(['Rooms', 'Price (HUF)']).reset_index(drop=True))    
     count = df['Price (HUF)'].count()
@@ -94,6 +92,9 @@ def general():
         # st.pyplot(fig)
         fig = px.imshow(corr, text_auto=True, color_continuous_scale='Hot')
         st.plotly_chart(fig, use_container_width=True)
+        
+        sns.set_palette('bright')
+        sns.set_style('dark')
         fig1 = sns.pairplot(df)
         st.pyplot(fig1)
 
