@@ -86,12 +86,14 @@ def general():
         # st.pyplot(fig)
     with tab2:
         corr = df.corr(numeric_only=True).round(2)
-        st.write('An obvious correlation can be found between size of property and the rent price of it.')
+        st.write('One might think there would be a strong correlation between price and size but it does not pass 50%')
         # fig = plt.figure(figsize=(6,4))
         # sns.heatmap(corr, annot=True)
         # st.pyplot(fig)
         fig = px.imshow(corr, text_auto=True, color_continuous_scale='Hot')
         st.plotly_chart(fig, use_container_width=True)
+        fig1 = sns.pairplot(df)
+        st.pyplot(fig1)
 
 def rooms_ft():
     import streamlit as st
