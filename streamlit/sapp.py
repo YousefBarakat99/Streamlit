@@ -60,6 +60,8 @@ def general():
     import seaborn as sns
     import matplotlib.pyplot as plt
     import plotly.express as px
+    sns.set_palette('bright')
+    sns.set_theme()
     st.subheader('General property info')
     st.dataframe(df.sort_values(['Rooms', 'Price (HUF)']).reset_index(drop=True))    
     count = df['Price (HUF)'].count()
@@ -86,7 +88,7 @@ def general():
         # st.pyplot(fig)
     with tab2:
         corr = df.corr(numeric_only=True).round(2)
-        st.write('One might think there would be a strong correlation between price and size but it does not pass 50%')
+        st.write('One might think there would be a strong correlation between price and size but it is only at the 60% mark.')
         # fig = plt.figure(figsize=(6,4))
         # sns.heatmap(corr, annot=True)
         # st.pyplot(fig)
