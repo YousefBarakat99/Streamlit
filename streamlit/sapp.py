@@ -61,7 +61,7 @@ def general():
     import matplotlib.pyplot as plt
     import plotly.express as px
     sns.set_palette('bright')
-    sns.set_style('dark')
+    sns.set_style('whitegrid')
     st.subheader('General property info')
     st.dataframe(df.sort_values(['Rooms', 'Price (HUF)']).reset_index(drop=True))    
     count = df['Price (HUF)'].count()
