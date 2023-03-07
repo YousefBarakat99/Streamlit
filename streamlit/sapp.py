@@ -61,7 +61,7 @@ def general():
     import matplotlib.pyplot as plt
     import plotly.express as px
     st.subheader('General property info')
-    st.dataframe(df.sort_values(['Rooms', 'Price (HUF)']).reset_index(drop=True))    
+    st.dataframe(df.sort_values('Price (HUF)').reset_index(drop=True))    
     count = df['Price (HUF)'].count()
     ravg = np.mean(df['Rooms']).round(1)
     savg = np.mean(df['Size (m2)']).round(2)
