@@ -145,7 +145,7 @@ def rooms_ft():
     elif rooms == '>3':
         st.dataframe(df[df['Rooms'] >3 ].sort_values('Price (HUF)').drop(columns='Address').reset_index(drop=True))
         df1 = df[(df['Rooms'] > 3) & (df['Price (HUF)'] > 40_000) & (df['Size (m2)'].notna())].sort_values('Price (HUF)').reset_index(drop=True)
-        st.write(f'There are {len(df1)} properties with more than three rooms and the average price is {df1["Price (HUF)"].mean()}.')
+        st.write(f'There are {len(df1)} properties with more than three rooms and the average price is {df1["Price (HUF)"].mean().round(0)}.')
         fig = px.line(df1, x='Price (HUF)', y='Size (m2)', title='Price change according to Size')
         st.plotly_chart(fig, use_container_width=True)
         # fig, ax = plt.subplots()
