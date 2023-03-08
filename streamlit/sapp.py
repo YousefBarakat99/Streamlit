@@ -80,8 +80,10 @@ def general():
         # ax.set_title('Count of properties with number of rooms')
         fig = px.histogram(df, x='Rooms', color='Rooms')
         fig.update_traces(marker_line_width=2,marker_line_color="black")
-        st.write('''The most common number of rooms amongst properties is 3, followed by 4 then by 2. 
-        This can be due to the fact that some properties count the living room as an additional room or bedroom.''')
+        rooms_dict = list(df['Rooms'].value_counts().to_dict())
+        st.write(f'''The most common number of rooms amongst properties is {rooms_dict[0]}, followed by {rooms_dict[1]} then by {rooms_dict[2]}. 
+        This can be due to the fact that not all websites or agents count rooms in the same way.
+        Some may count living rooms as bedrooms while others may count in a different way.''')
         st.plotly_chart(fig, use_container_width=True)
         # st.pyplot(fig)
     with tab2:
@@ -92,7 +94,6 @@ def general():
         # st.pyplot(fig)
         fig = px.imshow(corr, text_auto=True, color_continuous_scale='Hot')
         st.plotly_chart(fig, use_container_width=True)
-        
         sns.set_palette('bright')
         sns.set_style('dark')
         fig1 = sns.pairplot(df)
