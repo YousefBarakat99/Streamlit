@@ -105,7 +105,6 @@ def rooms_ft():
     import plotly.express as px
 
     st.write('Filter by rooms')
-    rooms = st.radio('Number of rooms', ('1', '2', '3', '>3'))
     if rooms == '1':
         st.dataframe(df[df['Rooms'] == 1].sort_values('Price (HUF)').drop(columns='Address').reset_index(drop=True))
         df1 = df[(df['Rooms'] == 1) & (df['Price (HUF)'] > 50_000) & (df['Size (m2)'].notna())].sort_values('Price (HUF)').reset_index(drop=True)
@@ -151,7 +150,7 @@ def rooms_ft():
         # ax.set_ylabel('Size of property in m2')
         # ax.ticklabel_format(style='plain')
         # st.pyplot(fig)
-
+    rooms = st.radio('Number of rooms', ('1', '2', '3', '>3'))
 def price_ft():
     import streamlit as st
     import matplotlib.pyplot as plt
