@@ -81,7 +81,7 @@ def general():
         # fig = plt.figure(figsize=(6,4))
         # sns.heatmap(corr, annot=True)
         # st.pyplot(fig)
-        fig = px.imshow(corr, text_auto=True, color_continuous_scale='Hot')
+        fig = px.imshow(corr, text_auto=True, color_continuous_scale='bluered')
         st.plotly_chart(fig, use_container_width=True)
         sns.set_palette('bright')
         sns.set_style('dark')
