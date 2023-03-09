@@ -185,6 +185,7 @@ def price_ft():
 
 def complete():
     import streamlit as st
+    import plotly.express as px
 
     st.header('Interactive dashboard')
     minp, maxp = st.select_slider('''Most importantly, what's your price range?''', df['Price (HUF)'].sort_values(), (df['Price (HUF)'].min(), df['Price (HUF)'].max()), key='price_select')
@@ -205,6 +206,11 @@ def complete():
     else:
         st.success(f'There are a total of {df1["Price (HUF)"].count()} properties that match your description!')
         st.dataframe(df1)
+        fig = px.histogram(df1, x='Rooms', color='Rooms')
+        fig.update_traces(marker_line_width=2,marker_line_color="black")
+        st.plotly_chart(fig, use_container_width=True)
+        fig1 = px.line(df1, x='Price (HUF)', y='Size (m2)', title='Price change according to Size')
+        st.plotly_chart(fig1, use_container_width=True)
 
 page_names_to_funcs = {
     "—": intro,
