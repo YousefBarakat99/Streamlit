@@ -32,6 +32,7 @@ def intro():
         - Beautifulsoup4
         - Streamlit
         - Seaborn
+        - Plotly
         
         &nbsp;
         ### :mailbox_with_mail: Where you could find me:
