@@ -11,7 +11,6 @@ import re
 options = webdriver.ChromeOptions()
 options.add_argument('--ignore-certificate-errors')
 options.add_argument('--incognito')
-# options.add_argument('--headless')
 driver = webdriver.Chrome("C:\Program Files (x86)\chromedriver.exe", chrome_options=options)
 driver.get('https://www.findahome.hu/ingatlanok/?search=all')
 
