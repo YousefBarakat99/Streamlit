@@ -1,18 +1,5 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
-
-# exec(open("scraping.py").read())
-
-# filename = 'housesTRIALcleaning.ipynb'
-# with open(filename) as fp:
-#     nb = load(fp)
-
-# for cell in nb['cells']:
-#     if cell['cell_type'] == 'code':
-#         source = ''.join(line for line in cell['source'] if not line.startswith('%'))
-#         exec(source, globals(), locals())
-
 #* Sending data to streamlit
 df = pd.read_excel('streamlit/Houses_Cleaned.xlsx')
 df['Address'] = df['Address'].fillna('Address unavailable')
@@ -58,7 +45,6 @@ def general():
     import streamlit as st
     import numpy as np
     import seaborn as sns
-    import matplotlib.pyplot as plt
     import plotly.express as px
     import datetime as dt
     st.subheader('General property info')
@@ -103,7 +89,6 @@ def general():
 
 def rooms_ft():
     import streamlit as st
-    import matplotlib.pyplot as plt
     import plotly.express as px
 
     st.write('Filter by rooms')
@@ -160,9 +145,7 @@ def rooms_ft():
 
 def price_ft():
     import streamlit as st
-    import matplotlib.pyplot as plt
     import plotly.express as px
-    import plotly.figure_factory as ff
 
     st.header('Filter by prices using a slider')
     st.write()
