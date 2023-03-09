@@ -125,7 +125,7 @@ for i in range(50):
         break
     for i in range(35):
         actions.send_keys(Keys.ARROW_DOWN).perform()
-    time.sleep(1.6)
+    time.sleep(1.3)
 
 page = driver.page_source
 soup = BeautifulSoup(page, 'html.parser')
