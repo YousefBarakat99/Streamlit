@@ -25,7 +25,7 @@ def intro():
 
         &nbsp;
         ### 🌱 I am currently working on:
-        - Learning Data Analysis and Visualization using Python, SQL, Excel, [Tableau](https://public.tableau.com/app/profile/yousef.barakat)
+        - Practising Data Analysis and Visualization using Python, SQL, Excel, [Tableau](https://public.tableau.com/app/profile/yousef.barakat)
         - Expanding my [Portfolio](https://github.com/YousefBarakat99/My_Portfolio)
 
         &nbsp;
