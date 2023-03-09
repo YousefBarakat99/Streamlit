@@ -189,7 +189,7 @@ def complete():
     import datetime as dt
 
     st.header('Interactive dashboard')
-    st.write(f'Date updated: {dt.date.today()}')
+    st.write(f'Data updated on: {dt.date.today()}')
     minp, maxp = st.select_slider('''Most importantly, what's your price range?''', df['Price (HUF)'].sort_values(), (df['Price (HUF)'].min(), df['Price (HUF)'].max()), key='price_select')
     rentee = st.radio('Are you moving in alone or with others?', ('Alone', 'With others'), key='choice')
     if rentee == 'With others':
