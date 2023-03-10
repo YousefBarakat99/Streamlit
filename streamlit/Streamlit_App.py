@@ -253,7 +253,22 @@ def price_ft():
     st.write(f'''There are a total of {df1["Price (HUF)"].count()} properties within that price range. 
     The average size is {df1["Size (m2)"].mean().round(1)} m2 whereas the average number of rooms 
     is {df1["Rooms"].mean().round(1)}''')
-    st.dataframe(df1)
+    # st.dataframe(df1)
+    fig = go.Figure(
+    data=[
+        go.Table(
+            columnwidth = [1,1,0.5],
+            header=dict(
+                values=[f"<b>{i}</b>" for i in df1.columns.to_list()],
+                fill_color='black'
+                ),
+            cells=dict(
+                values=df1.transpose()
+                )
+            )
+        ]
+    )
+    st.plotly_chart(fig, use_container_width=True)
 
 def complete():
     import streamlit as st
@@ -278,13 +293,28 @@ def complete():
         st.error('There no properties that match your description.')
     else:
         st.success(f'There are a total of {df1["Price (HUF)"].count()} properties that match your description!')
-        st.dataframe(df1)
+        # st.dataframe(df1)
+        fig = go.Figure(
+    data=[
+        go.Table(
+            columnwidth = [1,1,0.5],
+            header=dict(
+                values=[f"<b>{i}</b>" for i in df1.columns.to_list()],
+                fill_color='black'
+                ),
+            cells=dict(
+                values=df1.transpose()
+                )
+            )
+        ]
+    )
+        st.plotly_chart(fig, use_container_width=True)
         fig = px.histogram(df1, x='Rooms', color='Rooms')
         fig.update_traces(marker_line_width=2,marker_line_color="black")
         st.plotly_chart(fig, use_container_width=True)
-        fig2 = px.histogram(df1, x='Price (HUF)', color_discrete_sequence=['turquoise'])
-        fig2.update_traces(marker_line_width=2,marker_line_color="black")
-        st.plotly_chart(fig2, use_container_width=True)
+        fig = px.histogram(df1, x='Price (HUF)', color_discrete_sequence=['turquoise'])
+        fig.update_traces(marker_line_width=2,marker_line_color="black")
+        st.plotly_chart(fig, use_container_width=True)
         fig1 = px.line(df1, x='Price (HUF)', y='Size (m2)', title='Price change according to Size')
         st.plotly_chart(fig1, use_container_width=True)
 
