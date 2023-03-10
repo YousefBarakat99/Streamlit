@@ -105,7 +105,7 @@ def general():
         # st.pyplot(fig)
     with tab2:
         corr = df.corr(numeric_only=True).round(2)
-        st.write('One might think there would be a strong correlation between price and size but it is only at the 60% mark.')
+        st.write('''One might think there would be a strong correlation between price and size but it is only between the 60% and 70% mark.''')
         # fig = plt.figure(figsize=(6,4))
         # sns.heatmap(corr, annot=True)
         # st.pyplot(fig)
