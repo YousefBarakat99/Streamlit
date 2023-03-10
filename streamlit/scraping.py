@@ -175,7 +175,7 @@ df = pd.DataFrame(listings, columns=['Price (HUF)', 'Size', 'Rooms', 'Address', 
 print(len(df))
 
 #* Exporting to an excel file
-df.to_excel(r'C:\Users\youse\Desktop\Data Analysis Portfolio\Python\Data Scraping\streamlit\housesTRIAL.xlsx', index=False, header=['Price (HUF)', 'Size', 'Rooms', 'Address', 'Link'])
+df.to_excel('housesTRIAL.xlsx', index=False, header=['Price (HUF)', 'Size', 'Rooms', 'Address', 'Link'])
 driver.quit()
 
 

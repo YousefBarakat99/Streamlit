@@ -1,9 +1,15 @@
 import streamlit as st
 import pandas as pd
+import plotly.graph_objects as go
 #* Sending data to streamlit
 df = pd.read_excel('streamlit/Houses_Cleaned.xlsx')
 # df = pd.read_excel('Houses_Cleaned.xlsx')
 df['Address'] = df['Address'].fillna('Address unavailable')
+def create_link(url:str) -> str:
+    return f'''<a href="{url}">🔗</a>'''
+df['Link'] = [create_link(url) for url in df["Link"]]
+
+today = '2023-03-10'
 
 def intro():
     import streamlit as st
@@ -52,10 +58,27 @@ def general():
     import numpy as np
     import seaborn as sns
     import plotly.express as px
-    import datetime as dt
     st.subheader('General property info')
-    st.write(f'Date updated: {dt.date.today()}')
-    st.dataframe(df.sort_values('Price (HUF)').reset_index(drop=True))    
+    st.write(f'Date updated: {today}')
+    # st.dataframe(df.sort_values('Price (HUF)').reset_index(drop=True))
+    # st.markdown(df.to_html(render_links=True),unsafe_allow_html=True)
+
+    fig = go.Figure(
+    data=[
+        go.Table(
+            columnwidth = [1,1,0.5],
+            header=dict(
+                values=[f"<b>{i}</b>" for i in df.columns.to_list()],
+                fill_color='black'
+                ),
+            cells=dict(
+                values=df.transpose()
+                )
+            )
+        ]
+    )
+    st.plotly_chart(fig, use_container_width=True)
+
     count = df['Price (HUF)'].count()
     ravg = np.mean(df['Rooms']).round(1)
     savg = np.mean(df['Size (m2)']).round(2)
@@ -96,12 +119,27 @@ def general():
 def rooms_ft():
     import streamlit as st
     import plotly.express as px
-
+    
     st.write('Filter by rooms')
     rooms = st.radio('Number of rooms', ('1', '2', '3', '>3'))
     if rooms == '1':
-        st.dataframe(df[df['Rooms'] == 1].sort_values('Price (HUF)').drop(columns='Address').reset_index(drop=True))
+        # st.dataframe(df[df['Rooms'] == 2].sort_values('Price (HUF)').drop(columns='Address').reset_index(drop=True))
         df1 = df[(df['Rooms'] == 1) & (df['Price (HUF)'] > 50_000) & (df['Size (m2)'].notna())].sort_values('Price (HUF)').reset_index(drop=True)
+        fig = go.Figure(
+    data=[
+        go.Table(
+            columnwidth = [1,1,0.5],
+            header=dict(
+                values=[f"<b>{i}</b>" for i in df1.columns.to_list()],
+                fill_color='black'
+                ),
+            cells=dict(
+                values=df1.transpose()
+                )
+            )
+        ]
+    )
+        st.plotly_chart(fig, use_container_width=True)
         st.write(f'There are {len(df1)} properties with just one room and the average price is {int(df1["Price (HUF)"].mean())} HUF.')
         fig = px.line(df1, x='Price (HUF)', y='Size (m2)', title='Price change according to Size')
         st.plotly_chart(fig, use_container_width=True)
@@ -112,8 +150,23 @@ def rooms_ft():
         # ax.set_ylabel('Size of property in m2')
         # st.pyplot(fig)
     elif rooms == '2':
-        st.dataframe(df[df['Rooms'] == 2].sort_values('Price (HUF)').drop(columns='Address').reset_index(drop=True))
+        # st.dataframe(df[df['Rooms'] == 2].sort_values('Price (HUF)').drop(columns='Address').reset_index(drop=True))
         df1 = df[(df['Rooms'] == 2) & (df['Price (HUF)'] > 40_000) & (df['Size (m2)'].notna())].sort_values('Price (HUF)').reset_index(drop=True)
+        fig = go.Figure(
+    data=[
+        go.Table(
+            columnwidth = [1,1,0.5],
+            header=dict(
+                values=[f"<b>{i}</b>" for i in df1.columns.to_list()],
+                fill_color='black'
+                ),
+            cells=dict(
+                values=df1.transpose()
+                )
+            )
+        ]
+    )
+        st.plotly_chart(fig, use_container_width=True)
         st.write(f'There are {len(df1)} properties with two rooms and the average price is {int(df1["Price (HUF)"].mean())} HUF.')
         fig = px.line(df1, x='Price (HUF)', y='Size (m2)', title='Price change according to Size')
         st.plotly_chart(fig, use_container_width=True)
@@ -124,8 +177,23 @@ def rooms_ft():
         # ax.set_ylabel('Size of property in m2')
         # st.pyplot(fig)
     elif rooms == '3':
-        st.dataframe(df[df['Rooms'] == 3].sort_values('Price (HUF)').drop(columns='Address').reset_index(drop=True))
+        # st.dataframe(df[df['Rooms'] == 3].sort_values('Price (HUF)').drop(columns='Address').reset_index(drop=True))
         df1 = df[(df['Rooms'] == 3) & (df['Price (HUF)'] > 40_000) & (df['Size (m2)'].notna())].sort_values('Price (HUF)').reset_index(drop=True)
+        fig = go.Figure(
+    data=[
+        go.Table(
+            columnwidth = [1,1,0.5],
+            header=dict(
+                values=[f"<b>{i}</b>" for i in df1.columns.to_list()],
+                fill_color='black'
+                ),
+            cells=dict(
+                values=df1.transpose()
+                )
+            )
+        ]
+    )
+        st.plotly_chart(fig, use_container_width=True)
         st.write(f'There are {len(df1)} properties with three rooms and the average price is {int(df1["Price (HUF)"].mean())} HUF.')
         fig = px.line(df1, x='Price (HUF)', y='Size (m2)', title='Price change according to Size')
         st.plotly_chart(fig, use_container_width=True)
@@ -136,8 +204,23 @@ def rooms_ft():
         # ax.set_ylabel('Size of property in m2')
         # st.pyplot(fig)
     elif rooms == '>3':
-        st.dataframe(df[df['Rooms'] >3 ].sort_values('Price (HUF)').drop(columns='Address').reset_index(drop=True))
+        # st.dataframe(df[df['Rooms'] >3 ].sort_values('Price (HUF)').drop(columns='Address').reset_index(drop=True))
         df1 = df[(df['Rooms'] > 3) & (df['Price (HUF)'] > 40_000) & (df['Size (m2)'].notna())].sort_values('Price (HUF)').reset_index(drop=True)
+        fig = go.Figure(
+    data=[
+        go.Table(
+            columnwidth = [1,1,0.5],
+            header=dict(
+                values=[f"<b>{i}</b>" for i in df1.columns.to_list()],
+                fill_color='black'
+                ),
+            cells=dict(
+                values=df1.transpose()
+                )
+            )
+        ]
+    )
+        st.plotly_chart(fig, use_container_width=True)
         st.write(f'There are {len(df1)} properties with more than three rooms and the average price is {int(df1["Price (HUF)"].mean())} HUF.')
         fig = px.line(df1, x='Price (HUF)', y='Size (m2)', title='Price change according to Size')
         st.plotly_chart(fig, use_container_width=True)
@@ -175,10 +258,9 @@ def price_ft():
 def complete():
     import streamlit as st
     import plotly.express as px
-    import datetime as dt
 
     st.header('Interactive dashboard')
-    st.write(f'Data updated on: {dt.date.today()}')
+    st.write(f'Data updated on: {today}')
     minp, maxp = st.select_slider('''Most importantly, what's your price range?''', df['Price (HUF)'].sort_values(), (df['Price (HUF)'].min(), df['Price (HUF)'].max()), key='price_select')
     rentee = st.radio('Are you moving in alone or with others?', ('Alone', 'With others'), key='choice')
     if rentee == 'With others':
