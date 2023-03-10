@@ -281,7 +281,7 @@ def complete():
     if rentee == 'With others':
         num = st.number_input('How many others?', 1, 4, key='people') + 1
     else:
-        num = 0
+        num = 1
     
     sizes = st.radio('''Any size in mind?''', ('''Doesn't matter''', '''I have a size in mind'''), key='s_choice')
     if sizes == 'I have a size in mind':
