@@ -352,7 +352,7 @@ def complete():
 
 
 page_names_to_funcs = {
-    "—": intro,
+    "Introduction": intro,
     "General info": general,
     "Filter by rooms": rooms_ft,
     'Filter by prices': price_ft,
