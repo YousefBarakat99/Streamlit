@@ -316,7 +316,7 @@ def complete():
     else:
         mins, maxs = df['Size (m2)'].dropna(
         ).min(), df['Size (m2)'].dropna().max()
-    df1 = df[(df['Rooms'] <= (num+1)) & (df['Rooms'] > num) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
+    df1 = df[(df['Rooms'] <= (num+1)) & (df['Rooms'] >= num) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
              (df['Size (m2)'] <= maxs) & ((df['Size (m2)'] >= mins))].sort_values('Price (HUF)').reset_index(drop=True)
     if len(df1) == 0:
         st.error('There no properties that match your description.')
