@@ -1,4 +1,5 @@
 from selenium import webdriver
+import chromedriver_binary
 from bs4 import BeautifulSoup
 import pandas as pd
 from selenium.webdriver.common.by import By
@@ -9,10 +10,8 @@ import re
 
 
 options = webdriver.ChromeOptions()
-options.add_argument('--ignore-certificate-errors')
 options.add_argument('--incognito')
-driver = webdriver.Chrome(
-    "C:\Program Files (x86)\chromedriver.exe", chrome_options=options)
+driver = webdriver.Chrome(options=options)
 driver.get('https://www.findahome.hu/ingatlanok/?search=all')
 
 page = driver.page_source
@@ -42,7 +41,8 @@ for ls in hidden:
     address = ls.find('div', class_='cim').text.strip()
     link = ls.find('a', class_='ingatlan_link')
     listings.append([price, size, rooms, address, link['href']])
-# driver.close()
+
+time.sleep(1)
 
 # * Going to a new website
 driver.execute_script("window.open('about:blank', 'secondtab');")
