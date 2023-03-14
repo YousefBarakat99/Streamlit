@@ -9,6 +9,7 @@
 - Beautifulsoup4
 - Streamlit
 - Seaborn
+- Plotly
 &nbsp;
 ### 🌱 I am currently working on:
 - Learning Data Analysis and Visualization using Python, SQL, Excel, [Tableau](https://public.tableau.com/app/profile/yousef.barakat)
