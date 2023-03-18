@@ -1,8 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
-from github import Github
-import os
+
 # * Sending data to streamlit
 df = pd.read_excel('streamlit/Houses_Cleaned.xlsx')
 # df = pd.read_excel('Houses_Cleaned.xlsx')
