@@ -348,8 +348,8 @@ def complete():
         )
         st.plotly_chart(fig, use_container_width=True)
 
-        X = df1['Size (m2)'].values.reshape(-1, 1)
-        y = df1['Rooms'].values
+        X = df['Size (m2)'].values.reshape(-1, 1)
+        y = df['Rooms'].values
         X_train, X_test, y_train, y_test = train_test_split(
             X, y, test_size=0.2, random_state=42)
         model = RandomForestRegressor(n_estimators=100, random_state=42)
