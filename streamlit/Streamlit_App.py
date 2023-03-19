@@ -356,9 +356,9 @@ def complete():
         model.fit(X_train, y_train)
         y_pred = model.predict(X_test)
         score = r2_score(y_test, y_pred)
+        st.write('Enter a size below and the machine learning algorithm will predict how many rooms could fit in the property. The answer is based on all the data gathered previously.')
         st.write(
             f'Accuracy of this machine learning model is {100 * score:.1f} %. An updated model is under progress and will be posted when ready!')
-        st.write('Enter a size below and the machine learning algorithm will predict how many rooms could fit in the property. The answer is based on all the data gathered previously.')
         new_size = st.number_input('Please enter your desired size: ')
         if new_size > 0:
             pred_rooms = model.predict([[new_size]])
