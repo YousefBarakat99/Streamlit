@@ -297,6 +297,9 @@ def price_ft():
 def complete():
     import streamlit as st
     import plotly.express as px
+    from sklearn.model_selection import train_test_split
+    from sklearn.ensemble import RandomForestRegressor
+    from sklearn.metrics import r2_score
 
     st.header('Interactive dashboard')
     st.write(f'Data updated on: {today}')
@@ -344,6 +347,22 @@ def complete():
             ]
         )
         st.plotly_chart(fig, use_container_width=True)
+
+        X = df1['Size (m2)'].values.reshape(-1, 1)
+        y = df1['Rooms'].values
+        X_train, X_test, y_train, y_test = train_test_split(
+            X, y, test_size=0.2, random_state=42)
+        model = RandomForestRegressor(n_estimators=100, random_state=42)
+        model.fit(X_train, y_train)
+        y_pred = model.predict(X_test)
+        score = r2_score(y_test, y_pred)
+        st.write(
+            f'Accuracy of this model is {100 * score:.1f} %. An updated model is under progress and will be posted when ready!')
+        new_size = st.number_input('Please enter your desired size: ')
+        pred_rooms = model.predict([[new_size]])
+        st.write(
+            f'Predicted number of rooms for an apartment of size {new_size} meter square, is {pred_rooms[0].round()} rooms')
+
         fig = px.histogram(df1, x='Rooms', color='Rooms')
         fig.update_traces(marker_line_width=2, marker_line_color="black")
         st.plotly_chart(fig, use_container_width=True)
