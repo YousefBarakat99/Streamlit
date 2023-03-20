@@ -14,7 +14,7 @@ def create_link(url: str) -> str:
 
 df['Link'] = [create_link(url) for url in df["Link"]]
 
-today = '2023-03-19'
+today = '2023-03-20'
 
 
 def intro():
@@ -300,6 +300,7 @@ def complete():
     from sklearn.model_selection import train_test_split
     from sklearn.ensemble import RandomForestRegressor
     from sklearn.metrics import r2_score
+    from joblib import load
 
     st.header('Interactive dashboard')
     st.write(f'Data updated on: {today}')
@@ -348,17 +349,10 @@ def complete():
         )
         st.plotly_chart(fig, use_container_width=True)
 
-        X = df['Size (m2)'].values.reshape(-1, 1)
-        y = df['Rooms'].values
-        X_train, X_test, y_train, y_test = train_test_split(
-            X, y, test_size=0.2, random_state=42)
-        model = RandomForestRegressor(n_estimators=100, random_state=42)
-        model.fit(X_train, y_train)
-        y_pred = model.predict(X_test)
-        score = r2_score(y_test, y_pred)
+        model = load('room-count-recommender.joblib')
         st.write('Enter a size below and the machine learning algorithm will predict how many rooms could fit in the property. The answer is based on all the data gathered previously.')
         st.write(
-            f'Currently, the accuracy of this machine learning model is {100 * score:.1f} %. An updated model is under progress and will be posted when ready!')
+            'Currently, the accuracy of this machine learning model is 59%. An updated model is under progress and will be posted when ready!')
         new_size = st.number_input('Please enter your desired size: ', 0, 200)
         if new_size > 0:
             pred_rooms = model.predict([[new_size]])
