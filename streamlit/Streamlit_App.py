@@ -354,7 +354,7 @@ def complete():
         st.write(
             'Currently, the accuracy of this machine learning model is 50% (which is pathetic). An updated model is under progress and will be posted when ready!')
         new_size = st.number_input('Please enter your desired size: ', 0, 200)
-        if new_size > 0:
+        if new_size >= 20:
             pred_rooms = model.predict([[new_size]])
             st.write(
                 f'Predicted number of rooms for an apartment of size {new_size} meter square, is {pred_rooms[0].round()} rooms')
