@@ -352,7 +352,7 @@ def complete():
         model = load('streamlit/room-count-recommender.joblib')
         st.write('Enter a size below and the machine learning algorithm will predict how many rooms could fit in the property. The answer is based on all the data gathered previously.')
         st.write(
-            'Currently, the accuracy of this machine learning model is 51% (which is pathetic). However, the accuracy changes everytime the data is scraped. An updated model is under progress and will be posted when ready!')
+            'Currently, the accuracy of this machine learning model is 53% (which is pathetic). However, the accuracy changes everytime the data is scraped. An updated model is under progress and will be posted when ready!')
         new_size = st.number_input('Please enter your desired size: ', 0, 200)
         if new_size >= 20:
             pred_rooms = model.predict([[new_size]])
