@@ -86,7 +86,7 @@ def general():
     st.plotly_chart(fig, use_container_width=True)
 
     count = df['Price (HUF)'].count()
-    ravg = np.mean(df['Rooms']).round()
+    ravg = int(np.mean(df['Rooms']).round())
     savg = np.mean(df['Size (m2)']).round(2)
     pavg = int(np.mean(df['Price (HUF)']))
     st.write(f'''There is a total of {count} properties. The average number of rooms is {ravg},
