@@ -123,7 +123,7 @@ def general():
         st.plotly_chart(fig, use_container_width=True)
         sns.set_palette('bright')
         sns.set_style('dark')
-        fig1 = sns.pairplot(df)
+        fig1 = sns.pairplot(dfc)
         st.pyplot(fig1)
 
 
