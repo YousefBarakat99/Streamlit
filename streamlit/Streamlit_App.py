@@ -110,6 +110,7 @@ def general():
         st.plotly_chart(fig, use_container_width=True)
         # st.pyplot(fig)
     with tab2:
+        df = df[df['Area'] != 'unknown']
         df['Area'] = df['Area'].astype('category').cat.codes
         corr = df.corr(numeric_only=True).round(2)
         st.write('''One might think there would be a strong correlation between 
