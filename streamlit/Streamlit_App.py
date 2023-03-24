@@ -110,9 +110,9 @@ def general():
         st.plotly_chart(fig, use_container_width=True)
         # st.pyplot(fig)
     with tab2:
-        df = df[df['Area'] != 'unknown']
-        df['Area'] = df['Area'].astype('category').cat.codes
-        corr = df.corr(numeric_only=True).round(2)
+        dfc = df[df['Area'] != 'unknown']
+        dfc['Area'] = dfc['Area'].astype('category').cat.codes
+        corr = dfc.corr(numeric_only=True).round(2)
         st.write('''One might think there would be a strong correlation between 
         price and size but it seems that the market does not reflect this correlation. Perhaps another correlation
         could be between the price and the location of the property.''')
