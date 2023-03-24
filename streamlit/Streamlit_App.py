@@ -90,7 +90,7 @@ def general():
     savg = np.mean(df['Size (m2)']).round(2)
     pavg = int(np.mean(df['Price (HUF)']))
     st.write(f'''There is a total of {count} properties. The average number of rooms is {ravg},
-     the average size is {savg} m2 and the average rent price is {pavg} HUF.''')
+     the average size is {savg} m2 and the average rent price is {pavg} HUF per month.''')
     st.write('')
     st.write('')
     st.write('Choose a visualization from below.')
