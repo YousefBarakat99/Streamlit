@@ -111,7 +111,9 @@ def general():
         # st.pyplot(fig)
     with tab2:
         corr = df.corr(numeric_only=True).round(2)
-        st.write('''One might think there would be a strong correlation between price and size but it is only around the 60% mark''')
+        st.write('''One might think there would be a strong correlation between 
+        price and size but it seems that the market does not reflect this correlation. Perhaps another correlation
+        could be between the price and the location of the property.''')
         # fig = plt.figure(figsize=(6,4))
         # sns.heatmap(corr, annot=True)
         # st.pyplot(fig)
