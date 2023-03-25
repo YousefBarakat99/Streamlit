@@ -370,18 +370,18 @@ def complete():
         model = load('room-count-recommender.joblib')
         st.write('Enter a size below and the machine learning algorithm will predict how many rooms could fit in the property. The answer is based on all the data gathered previously.')
         st.write(
-            'Currently, the accuracy of this machine learning model is 60% (which is decent). However, the accuracy changes everytime the data is scraped. An updated model is under progress and will be posted when ready!')
-        new_size = st.number_input('Please enter your desired size: ', 0, 200)
+            '''Currently, the accuracy of this machine learning model is 41% (which is terrible but it's just practice). However, 
+            the accuracy changes everytime the data is scraped. An updated model is under progress and will be posted when ready!''')
         rooms = st.number_input('How many rooms?', 1, 5)
         area = st.radio('Where?', ('Center', 'Other'))
         if area == 'Other':
             code = 1
         elif area == 'Center':
             code = 0
-        if new_size >= 20:
-            pred_price = model.predict([[new_size, rooms, code]])
-            st.write(
-                f'Predicted price of property for an apartment of size {new_size} meter square, with {rooms} rooms and location is {area}, is {int(pred_price[0].round())} HUF')
+        if rooms >= 1:
+            pred_price = model.predict([[rooms, code]])
+            st.success(
+                f'Predicted price of property for an apartment with {rooms} rooms and location is {area}, is {int(pred_price[0].round())} HUF')
 
         fig = px.histogram(df1, x='Rooms', color='Rooms')
         fig.update_traces(marker_line_width=2, marker_line_color="black")
