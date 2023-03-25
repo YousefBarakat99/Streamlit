@@ -14,7 +14,7 @@ def create_link(url: str) -> str:
 
 df['Link'] = [create_link(url) for url in df["Link"]]
 
-today = '2023-03-24'
+today = '2023-03-25'
 
 
 def intro():
@@ -311,6 +311,7 @@ def complete():
     st.write(f'Data updated on: {today}')
     minp, maxp = st.select_slider('''Most importantly, what's your price range?''', df['Price (HUF)'].sort_values(
     ), (df['Price (HUF)'].min(), df['Price (HUF)'].max()), key='price_select')
+    loc = st.radio('Do you want to live in the center?', ('Yes', 'No'))
     rentee = st.radio('Are you moving in alone or with others?',
                       ('Alone', 'With others'), key='choice')
     if rentee == 'With others':
@@ -326,12 +327,20 @@ def complete():
     else:
         mins, maxs = df['Size (m2)'].dropna(
         ).min(), df['Size (m2)'].dropna().max()
-    if num == 5:
-        df1 = df[(df['Rooms'] >= (num)) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
-                 (df['Size (m2)'] <= maxs) & ((df['Size (m2)'] >= mins))].sort_values('Price (HUF)').reset_index(drop=True)
+    if (num == 5):
+        if loc == 'Yes':
+            df1 = df[(df['Rooms'] >= (num)) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
+                     (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] == 'center')].sort_values('Price (HUF)').reset_index(drop=True)
+        else:
+            df1 = df[(df['Rooms'] >= (num)) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
+                     (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] != 'center')].sort_values('Price (HUF)').reset_index(drop=True)
     else:
-        df1 = df[(df['Rooms'] <= (num+1)) & (df['Rooms'] >= num) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
-                 (df['Size (m2)'] <= maxs) & ((df['Size (m2)'] >= mins))].sort_values('Price (HUF)').reset_index(drop=True)
+        if loc == 'Yes':
+            df1 = df[(df['Rooms'] <= (num+1)) & (df['Rooms'] >= num) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
+                     (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] == 'center')].sort_values('Price (HUF)').reset_index(drop=True)
+        else:
+            df1 = df[(df['Rooms'] <= (num+1)) & (df['Rooms'] >= num) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
+                     (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] != 'center')].sort_values('Price (HUF)').reset_index(drop=True)
     if len(df1) == 0:
         st.error('There no properties that match your description.')
     else:
