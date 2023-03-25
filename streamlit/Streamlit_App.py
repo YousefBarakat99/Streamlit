@@ -115,13 +115,16 @@ def general():
         corr = dfc.corr(numeric_only=True).round(2)
         st.write('''One might think there would be a strong correlation between 
         price and size but it seems that the market does not reflect this correlation. Perhaps another correlation
-        could be between the price and the location of the property.''')
+        could be between the price and the location of the property. We can examine that possible relation using
+        a heatmap below.''')
         # fig = plt.figure(figsize=(6,4))
         # sns.heatmap(corr, annot=True)
         # st.pyplot(fig)
         fig = px.imshow(corr, text_auto=True, color_continuous_scale='bluered')
         st.plotly_chart(fig, use_container_width=True)
-        st.write("As you can see above, there doesn't seem to be any correlation whatsoever between the location of the property and it's price.")
+        st.write('''As you can see above, there doesn't seem to be any correlation whatsoever between the location 
+            of the property and it's price. Which might mean that the property market in Debrecen does not follow 
+            any obvious relation or direction.''')
         sns.set_palette('bright')
         sns.set_style('dark')
         fig1 = sns.pairplot(dfc)
