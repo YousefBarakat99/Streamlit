@@ -3,8 +3,8 @@ import pandas as pd
 import plotly.graph_objects as go
 
 # * Sending data to streamlit
-df = pd.read_excel('streamlit/Houses_Cleaned.xlsx')
-# df = pd.read_excel('Houses_Cleaned.xlsx')
+# df = pd.read_excel('streamlit/Houses_Cleaned.xlsx')
+df = pd.read_excel('Houses_Cleaned.xlsx')
 df['Address'] = df['Address'].fillna('Address unavailable')
 
 
@@ -374,10 +374,14 @@ def complete():
         new_size = st.number_input('Please enter your desired size: ', 0, 200)
         rooms = st.number_input('How many rooms?', 1, 5)
         area = st.radio('Where?', ('Center', 'Other'))
+        if area == 'Other':
+            code = 1
+        elif area == 'Center':
+            code = 0
         if new_size >= 20:
-            pred_price = model.predict([[new_size, rooms, area]])
+            pred_price = model.predict([[new_size, rooms, code]])
             st.write(
-                f'Predicted price of property for an apartment of size {new_size} meter square, with {rooms} rooms and location is {area}, is {int(pred_price[0].round())} rooms')
+                f'Predicted price of property for an apartment of size {new_size} meter square, with {rooms} rooms and location is {area}, is {int(pred_price[0].round())} HUF')
 
         fig = px.histogram(df1, x='Rooms', color='Rooms')
         fig.update_traces(marker_line_width=2, marker_line_color="black")
