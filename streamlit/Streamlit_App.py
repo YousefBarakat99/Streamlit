@@ -3,8 +3,8 @@ import pandas as pd
 import plotly.graph_objects as go
 
 # * Sending data to streamlit
-# df = pd.read_excel('streamlit/Houses_Cleaned.xlsx')
-df = pd.read_excel('Houses_Cleaned.xlsx')
+df = pd.read_excel('streamlit/Houses_Cleaned.xlsx')
+# df = pd.read_excel('Houses_Cleaned.xlsx')
 df['Address'] = df['Address'].fillna('Address unavailable')
 
 
@@ -366,8 +366,8 @@ def complete():
         )
         st.plotly_chart(fig, use_container_width=True)
 
-        # model = load('streamlit/room-count-recommender.joblib')
-        model = load('room-count-recommender.joblib')
+        model = load('streamlit/room-count-recommender.joblib')
+        # model = load('room-count-recommender.joblib')
         st.write('Enter a size below and the machine learning algorithm will predict how many rooms could fit in the property. The answer is based on all the data gathered previously.')
         st.write(
             '''Currently, the accuracy of this machine learning model is 41% (which is terrible but it's just practice). However, 
