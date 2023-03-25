@@ -366,15 +366,18 @@ def complete():
         )
         st.plotly_chart(fig, use_container_width=True)
 
-        model = load('streamlit/room-count-recommender.joblib')
+        # model = load('streamlit/room-count-recommender.joblib')
+        model = load('room-count-recommender.joblib')
         st.write('Enter a size below and the machine learning algorithm will predict how many rooms could fit in the property. The answer is based on all the data gathered previously.')
         st.write(
-            'Currently, the accuracy of this machine learning model is 66% (which is decent). However, the accuracy changes everytime the data is scraped. An updated model is under progress and will be posted when ready!')
+            'Currently, the accuracy of this machine learning model is 60% (which is decent). However, the accuracy changes everytime the data is scraped. An updated model is under progress and will be posted when ready!')
         new_size = st.number_input('Please enter your desired size: ', 0, 200)
+        rooms = st.number_input('How many rooms?', 1, 5)
+        area = st.radio('Where?', ('Center', 'Other'))
         if new_size >= 20:
-            pred_rooms = model.predict([[new_size]])
+            pred_price = model.predict([[new_size, rooms, area]])
             st.write(
-                f'Predicted number of rooms for an apartment of size {new_size} meter square, is {int(pred_rooms[0].round())} rooms')
+                f'Predicted price of property for an apartment of size {new_size} meter square, with {rooms} rooms and location is {area}, is {int(pred_price[0].round())} rooms')
 
         fig = px.histogram(df1, x='Rooms', color='Rooms')
         fig.update_traces(marker_line_width=2, marker_line_color="black")
