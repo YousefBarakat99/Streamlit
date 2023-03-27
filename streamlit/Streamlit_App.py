@@ -14,7 +14,7 @@ def create_link(url: str) -> str:
 
 df['Link'] = [create_link(url) for url in df["Link"]]
 
-today = '2023-03-25'
+today = '2023-03-26'
 
 
 def intro():
@@ -312,78 +312,64 @@ def complete():
 
     st.header('Interactive dashboard')
     st.write(f'Data updated on: {today}')
-    minp, maxp = st.select_slider('''Most importantly, what's your price range?''', df['Price (HUF)'].sort_values(
-    ), (df['Price (HUF)'].min(), df['Price (HUF)'].max()), key='price_select')
-    loc = st.radio('Do you want to live in the center?', ('Yes', 'No'))
-    rentee = st.radio('Are you moving in alone or with others?',
-                      ('Alone', 'With others'), key='choice')
-    if rentee == 'With others':
-        num = st.number_input('How many others?', 1, 4, key='people') + 1
-    else:
-        num = 1
-
-    sizes = st.radio('''Any size in mind?''', ('''Doesn't matter''',
-                     '''I have a size in mind'''), key='s_choice')
-    if sizes == 'I have a size in mind':
-        mins, maxs = st.select_slider('''Select size range''', df['Size (m2)'].dropna(
-        ).sort_values(), (df['Size (m2)'].min(), df['Size (m2)'].max()), key='size')
-    else:
-        mins, maxs = df['Size (m2)'].dropna(
-        ).min(), df['Size (m2)'].dropna().max()
-    if (num == 5):
-        if loc == 'Yes':
-            df1 = df[(df['Rooms'] >= (num)) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
-                     (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] == 'center')].sort_values('Price (HUF)').reset_index(drop=True)
+    ml, dash = st.tabs(
+        ['Price prediction using machine learning', 'Interactive dashboard'])
+    with dash:
+        minp, maxp = st.select_slider('''Most importantly, what's your price range?''', df['Price (HUF)'].sort_values(
+        ), (df['Price (HUF)'].min(), df['Price (HUF)'].max()), key='price_select')
+        loc = st.radio('Do you want to live in the center?', ('Yes', 'No'))
+        rentee = st.radio('Are you moving in alone or with others?',
+                          ('Alone', 'With others'), key='choice')
+        if rentee == 'With others':
+            num = st.number_input('How many others?', 1, 4, key='people') + 1
         else:
-            df1 = df[(df['Rooms'] >= (num)) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
-                     (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] != 'center')].sort_values('Price (HUF)').reset_index(drop=True)
-    else:
-        if loc == 'Yes':
-            df1 = df[(df['Rooms'] <= (num+1)) & (df['Rooms'] >= num) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
-                     (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] == 'center')].sort_values('Price (HUF)').reset_index(drop=True)
-        else:
-            df1 = df[(df['Rooms'] <= (num+1)) & (df['Rooms'] >= num) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
-                     (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] != 'center')].sort_values('Price (HUF)').reset_index(drop=True)
-    if len(df1) == 0:
-        st.error('There no properties that match your description.')
-    else:
-        st.success(
-            f'There are a total of {df1["Price (HUF)"].count()} properties that match your description!')
-        # st.dataframe(df1)
-        fig = go.Figure(
-            data=[
-                go.Table(
-                    columnwidth=[1, 1, 0.5],
-                    header=dict(
-                        values=[f"<b>{i}</b>" for i in df1.columns.to_list()],
-                        fill_color='black'
-                    ),
-                    cells=dict(
-                        values=df1.transpose()
-                    )
-                )
-            ]
-        )
-        st.plotly_chart(fig, use_container_width=True)
+            num = 1
 
-        model = load('streamlit/room-count-recommender.joblib')
-        # model = load('room-count-recommender.joblib')
-        st.write('Enter a size below and the machine learning algorithm will predict how many rooms could fit in the property. The answer is based on all the data gathered previously.')
-        st.write(
-            '''Currently, the accuracy of this machine learning model is 41% (which is terrible but it's just practice). However, 
-            the accuracy changes everytime the data is scraped. An updated model is under progress and will be posted when ready!''')
-        rooms = st.number_input('How many rooms?', 1, 5)
-        area = st.radio('Where?', ('Center', 'Other'))
-        if area == 'Other':
-            code = 1
-        elif area == 'Center':
-            code = 0
-        if rooms >= 1:
-            pred_price = model.predict([[rooms, code]])
+        sizes = st.radio('''Any size in mind?''', ('''Doesn't matter''',
+                                                   '''I have a size in mind'''), key='s_choice')
+        if sizes == 'I have a size in mind':
+            mins, maxs = st.select_slider('''Select size range''', df['Size (m2)'].dropna(
+            ).sort_values(), (df['Size (m2)'].min(), df['Size (m2)'].max()), key='size')
+        else:
+            mins, maxs = df['Size (m2)'].dropna(
+            ).min(), df['Size (m2)'].dropna().max()
+        if (num == 5):
+            if loc == 'Yes':
+                df1 = df[(df['Rooms'] >= (num)) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
+                         (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] == 'center')].sort_values('Price (HUF)').reset_index(drop=True)
+            else:
+                df1 = df[(df['Rooms'] >= (num)) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
+                         (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] != 'center')].sort_values('Price (HUF)').reset_index(drop=True)
+        else:
+            if loc == 'Yes':
+                df1 = df[(df['Rooms'] <= (num+1)) & (df['Rooms'] >= num) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
+                         (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] == 'center')].sort_values('Price (HUF)').reset_index(drop=True)
+            else:
+                df1 = df[(df['Rooms'] <= (num+1)) & (df['Rooms'] >= num) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
+                         (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] != 'center')].sort_values('Price (HUF)').reset_index(drop=True)
+        if len(df1) == 0:
+            st.error('There no properties that match your description.')
+        else:
             st.success(
-                f'Predicted price of property for an apartment with {rooms} rooms and location is {area}, is {int(pred_price[0].round())} HUF')
-
-        fig = px.histogram(df1, x='Rooms', color='Rooms')
+                f'There are a total of {df1["Price (HUF)"].count()} properties that match your description!')
+            # st.dataframe(df1)
+            fig = go.Figure(
+                data=[
+                    go.Table(
+                        columnwidth=[1, 1, 0.5],
+                        header=dict(
+                            values=[
+                                f"<b>{i}</b>" for i in df1.columns.to_list()],
+                            fill_color='black'
+                        ),
+                        cells=dict(
+                            values=df1.transpose()
+                        )
+                    )
+                ]
+            )
+            st.plotly_chart(fig, use_container_width=True)
+            fig = px.histogram(df1, x='Rooms', color='Rooms')
         fig.update_traces(marker_line_width=2, marker_line_color="black")
         st.plotly_chart(fig, use_container_width=True)
         fig = px.histogram(df1, x='Price (HUF)',
@@ -393,6 +379,21 @@ def complete():
         fig1 = px.line(df1, x='Price (HUF)', y='Size (m2)',
                        title='Price change according to Size')
         st.plotly_chart(fig1, use_container_width=True)
+    with ml:
+        model = load('streamlit/room-count-recommender.joblib')
+        # model = load('room-count-recommender.joblib')
+        st.write('''Enter the desired size and number of rooms below, and the machine learning algorithm will predict 
+        how many rooms could fit in the property. The answer is based on all the data gathered previously.''')
+        st.write(
+            '''The accuracy of this machine learning model is 98%. However, it is possible that  
+            the accuracy changes any time the data is scraped.''')
+        size = st.number_input(
+            '''What's your desired size? (must be above 20 meter square)''', 20, 150)
+        rooms = st.number_input('How many rooms?', 1, 5)
+        if (rooms >= 1) & (size >= 20):
+            pred_price = model.predict([[size, rooms]])
+            st.success(
+                f'Predicted monthly rental price of property for an apartment with {rooms} rooms and size {size} meter square, is {int(pred_price[0].round())} HUF')
 
 
 page_names_to_funcs = {
