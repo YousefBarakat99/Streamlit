@@ -372,15 +372,15 @@ def complete():
             )
             st.plotly_chart(fig, use_container_width=True)
             fig = px.histogram(df1, x='Rooms', color='Rooms')
-        fig.update_traces(marker_line_width=2, marker_line_color="black")
-        st.plotly_chart(fig, use_container_width=True)
-        fig = px.histogram(df1, x='Price (HUF)',
-                           color_discrete_sequence=['turquoise'])
-        fig.update_traces(marker_line_width=2, marker_line_color="black")
-        st.plotly_chart(fig, use_container_width=True)
-        fig1 = px.line(df1, x='Price (HUF)', y='Size (m2)',
-                       title='Price change according to Size')
-        st.plotly_chart(fig1, use_container_width=True)
+            fig.update_traces(marker_line_width=2, marker_line_color="black")
+            st.plotly_chart(fig, use_container_width=True)
+            fig = px.histogram(df1, x='Price (HUF)',
+                               color_discrete_sequence=['turquoise'])
+            fig.update_traces(marker_line_width=2, marker_line_color="black")
+            st.plotly_chart(fig, use_container_width=True)
+            fig1 = px.line(df1, x='Price (HUF)', y='Size (m2)',
+                           title='Price change according to Size')
+            st.plotly_chart(fig1, use_container_width=True)
 
     # * FOR ML TAB
     with ml:
