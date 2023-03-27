@@ -405,7 +405,7 @@ page_names_to_funcs = {
     "General info": general,
     "Filter by rooms": rooms_ft,
     'Filter by prices': price_ft,
-    'Interactive dashboard': complete
+    'Complete Web application': complete
 }
 
 demo_name = st.sidebar.selectbox("Choose a page", page_names_to_funcs.keys())
