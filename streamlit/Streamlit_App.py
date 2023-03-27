@@ -314,6 +314,8 @@ def complete():
     st.write(f'Data updated on: {today}')
     ml, dash = st.tabs(
         ['Price prediction using machine learning', 'Interactive dashboard'])
+
+    # * DASHBOARD TAB
     with dash:
         minp, maxp = st.select_slider('''Most importantly, what's your price range?''', df['Price (HUF)'].sort_values(
         ), (df['Price (HUF)'].min(), df['Price (HUF)'].max()), key='price_select')
@@ -379,6 +381,8 @@ def complete():
         fig1 = px.line(df1, x='Price (HUF)', y='Size (m2)',
                        title='Price change according to Size')
         st.plotly_chart(fig1, use_container_width=True)
+
+    # * FOR ML TAB
     with ml:
         model = load('streamlit/room-count-recommender.joblib')
         # model = load('room-count-recommender.joblib')
