@@ -310,7 +310,7 @@ def complete():
     from sklearn.metrics import r2_score
     from joblib import load
 
-    st.header('Interactive dashboard')
+    st.header('Complete application')
     st.write(f'Data updated on: {today}')
     ml, dash = st.tabs(
         ['Price prediction using machine learning', 'Interactive dashboard'])
