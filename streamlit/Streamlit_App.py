@@ -85,8 +85,6 @@ def general():
     )
     st.plotly_chart(fig, use_container_width=True)
 
-    st.write(df)
-
     count = df['Price (HUF)'].count()
     ravg = int(np.mean(df['Rooms']).round())
     savg = np.mean(df['Size (m2)']).round(2)
