@@ -332,6 +332,7 @@ def complete():
 
         sizes = st.radio('''Any size in mind?''', ('''Doesn't matter''',
                                                    '''I have a size in mind'''), key='s_choice')
+        sort = st.radio('''Sort by:''', ('Price (HUF)', 'Size (m2)'))
         if sizes == 'I have a size in mind':
             mins, maxs = st.select_slider('''Select size range''', df['Size (m2)'].dropna(
             ).sort_values(), (df['Size (m2)'].min(), df['Size (m2)'].max()), key='size')
@@ -341,23 +342,23 @@ def complete():
         if (num == 5):
             if loc == 'Yes':
                 df1 = df[(df['Rooms'] >= (num)) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
-                         (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] == 'center')].sort_values('Price (HUF)').reset_index(drop=True)
+                         (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] == 'center')].sort_values(sort).reset_index(drop=True)
             elif loc == 'No':
                 df1 = df[(df['Rooms'] >= (num)) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
-                         (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] != 'center')].sort_values('Price (HUF)').reset_index(drop=True)
+                         (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] != 'center')].sort_values(sort).reset_index(drop=True)
             else:
                 df1 = df[(df['Rooms'] >= (num)) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
-                         (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins)].sort_values('Price (HUF)').reset_index(drop=True)
+                         (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins)].sort_values(sort).reset_index(drop=True)
         else:
             if loc == 'Yes':
                 df1 = df[(df['Rooms'] <= (num+1)) & (df['Rooms'] >= num) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
-                         (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] == 'center')].sort_values('Price (HUF)').reset_index(drop=True)
+                         (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] == 'center')].sort_values(sort).reset_index(drop=True)
             elif loc == 'No':
                 df1 = df[(df['Rooms'] <= (num+1)) & (df['Rooms'] >= num) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
-                         (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] != 'center')].sort_values('Price (HUF)').reset_index(drop=True)
+                         (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] != 'center')].sort_values(sort).reset_index(drop=True)
             else:
                 df1 = df[(df['Rooms'] >= (num + 1)) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
-                         (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins)].sort_values('Price (HUF)').reset_index(drop=True)
+                         (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins)].sort_values(sort).reset_index(drop=True)
         if len(df1) == 0:
             st.error('There no properties that match your description.')
         else:
