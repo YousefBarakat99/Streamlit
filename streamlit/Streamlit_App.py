@@ -15,6 +15,8 @@ def create_link(url: str) -> str:
 df['Link'] = [create_link(url) for url in df["Link"]]
 
 today = '2023-03-28'
+message = st.write('''If the links do not work. it's probably due to the data being outdated 
+and I just need to update it. Please [contact me](https://yousefbarakat99.github.io/website/) if you face any such issues.''')
 
 
 def intro():
@@ -84,7 +86,7 @@ def general():
         ]
     )
     st.plotly_chart(fig, use_container_width=True)
-
+    message
     count = df['Price (HUF)'].count()
     ravg = int(np.mean(df['Rooms']).round())
     savg = np.mean(df['Size (m2)']).round(2)
@@ -371,6 +373,7 @@ def complete():
                 ]
             )
             st.plotly_chart(fig, use_container_width=True)
+            message
             fig = px.histogram(df1, x='Rooms', color='Rooms')
             fig.update_traces(marker_line_width=2, marker_line_color="black")
             st.plotly_chart(fig, use_container_width=True)
