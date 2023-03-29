@@ -404,6 +404,8 @@ def complete():
         st.write(
             '''The accuracy of this machine learning model is 98%. However, it is not a reflection 
             of what you might actually end up paying.''')
+        st.write(
+            '''Any questions? [Contact me!](https://yousefbarakat99.github.io/website/#contact)''')
         size = st.number_input(
             '''What's your desired size? (must be above 20 meter square)''', 20, 150)
         rooms = st.number_input('How many rooms?', 1, 5)
