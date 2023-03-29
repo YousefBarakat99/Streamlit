@@ -83,7 +83,7 @@ def general():
             )
         ]
     )
-    st.write('''If the links do not work. it's probably due to the data being outdated 
+    st.write('''If the links do not work, it's probably due to the data being outdated 
             and I just need to update it. Please [contact me](https://yousefbarakat99.github.io/website/) 
             if you face any such issues.''')
     st.plotly_chart(fig, use_container_width=True)
@@ -372,7 +372,7 @@ def complete():
                     )
                 ]
             )
-            st.write('''If the links do not work. it's probably due to the data being outdated 
+            st.write('''If the links do not work, it's probably due to the data being outdated 
             and I just need to update it. Please [contact me](https://yousefbarakat99.github.io/website/) 
             if you face any such issues.''')
             st.plotly_chart(fig, use_container_width=True)
