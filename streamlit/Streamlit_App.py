@@ -402,8 +402,8 @@ def complete():
         st.write('''Enter the desired size and number of rooms below, and the machine learning algorithm will predict 
         how many rooms could fit in the property. The answer is based on all the data gathered previously.''')
         st.write(
-            '''The accuracy of this machine learning model is 98%. However, it is possible that  
-            the accuracy changes any time the data is scraped.''')
+            '''The accuracy of this machine learning model is 98%. However, it is not a reflection 
+            of what you might actually end up paying.''')
         size = st.number_input(
             '''What's your desired size? (must be above 20 meter square)''', 20, 150)
         rooms = st.number_input('How many rooms?', 1, 5)
