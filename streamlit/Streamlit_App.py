@@ -332,7 +332,7 @@ def complete():
 
         sizes = st.radio('''Any size in mind?''', ('''Doesn't matter''',
                                                    '''I have a size in mind'''), key='s_choice')
-        sort = st.radio('''Sort by:''', ('Price (HUF)', 'Size (m2)'))
+        sort = st.radio('Sort by', ('Price (HUF)', 'Size (m2)'))
         if sizes == 'I have a size in mind':
             mins, maxs = st.select_slider('''Select size range''', df['Size (m2)'].dropna(
             ).sort_values(), (df['Size (m2)'].min(), df['Size (m2)'].max()), key='size')
