@@ -83,10 +83,10 @@ def general():
             )
         ]
     )
-    st.plotly_chart(fig, use_container_width=True)
     st.write('''If the links do not work. it's probably due to the data being outdated 
-    and I just need to update it. Please [contact me](https://yousefbarakat99.github.io/website/) 
-    if you face any such issues.''')
+            and I just need to update it. Please [contact me](https://yousefbarakat99.github.io/website/) 
+            if you face any such issues.''')
+    st.plotly_chart(fig, use_container_width=True)
     count = df['Price (HUF)'].count()
     ravg = int(np.mean(df['Rooms']).round())
     savg = np.mean(df['Size (m2)']).round(2)
@@ -372,10 +372,10 @@ def complete():
                     )
                 ]
             )
-            st.plotly_chart(fig, use_container_width=True)
             st.write('''If the links do not work. it's probably due to the data being outdated 
             and I just need to update it. Please [contact me](https://yousefbarakat99.github.io/website/) 
             if you face any such issues.''')
+            st.plotly_chart(fig, use_container_width=True)
             fig = px.histogram(df1, x='Rooms', color='Rooms')
             fig.update_traces(marker_line_width=2, marker_line_color="black")
             st.plotly_chart(fig, use_container_width=True)
