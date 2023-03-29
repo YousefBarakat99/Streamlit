@@ -84,7 +84,7 @@ def general():
         ]
     )
     st.write('''If the links do not work, it's probably due to the data being outdated 
-            and I just need to update it. Please [contact me](https://yousefbarakat99.github.io/website/) 
+            and I just need to update it. Please [contact me](https://yousefbarakat99.github.io/website/#contact) 
             if you face any such issues.''')
     st.plotly_chart(fig, use_container_width=True)
     count = df['Price (HUF)'].count()
@@ -373,7 +373,7 @@ def complete():
                 ]
             )
             st.write('''If the links do not work, it's probably due to the data being outdated 
-            and I just need to update it. Please [contact me](https://yousefbarakat99.github.io/website/) 
+            and I just need to update it. Please [contact me](https://yousefbarakat99.github.io/website/#contact) 
             if you face any such issues.''')
             st.plotly_chart(fig, use_container_width=True)
             fig = px.histogram(df1, x='Rooms', color='Rooms')
