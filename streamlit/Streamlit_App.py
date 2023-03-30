@@ -96,7 +96,7 @@ def general():
     st.write('')
     st.write('')
     st.write('Choose a visualization from below.')
-    tab1, tab2 = st.tabs(['Room count', 'Parameter correlation'])
+    tab1, tab2 = st.tabs(['Room count', 'Feature correlation'])
     with tab1:
         # fig, ax = plt.subplots(figsize=(10,10))
         # ax.hist('Rooms', data=df, edgecolor='black')
