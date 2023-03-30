@@ -14,7 +14,7 @@ def create_link(url: str) -> str:
 
 df['Link'] = [create_link(url) for url in df["Link"]]
 
-today = '2023-03-28'
+today = '2023-03-30'
 
 
 def intro():
@@ -407,7 +407,7 @@ def complete():
         st.write(
             '''Any questions? [Contact me!](https://yousefbarakat99.github.io/website/#contact)''')
         size = st.number_input(
-            '''What's your desired size? (must be above 20 meter square)''', 20, 150)
+            '''What's your desired size? (must be 20 meter square or more)''', 20, 150)
         rooms = st.number_input('How many rooms?', 1, 5)
         if (rooms >= 1) & (size >= 20):
             pred_price = model.predict([[size, rooms]])
