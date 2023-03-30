@@ -279,7 +279,7 @@ def price_ft():
     # ax.set_title('Count of properties according to price')
     # ax.ticklabel_format(style='plain')
     # st.pyplot(fig)
-    minp, maxp = st.select_slider('Select price range', df['Price (HUF)'].sort_values(
+    minp, maxp = st.select_slider('Select price range (HUF)', df['Price (HUF)'].sort_values(
     ), (df['Price (HUF)'].min(), df['Price (HUF)'].max()))
     df1 = df[(df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp)].sort_values(
         'Price (HUF)').drop(columns='Address').reset_index(drop=True)
@@ -319,7 +319,7 @@ def complete():
 
     # * DASHBOARD TAB
     with dash:
-        minp, maxp = st.select_slider('''Most importantly, what's your price range?''', df['Price (HUF)'].sort_values(
+        minp, maxp = st.select_slider('''Most importantly, what's your price range? (HUF)''', df['Price (HUF)'].sort_values(
         ), (df['Price (HUF)'].min(), df['Price (HUF)'].max()), key='price_select')
         loc = st.radio('Do you want to live in the center?',
                        ('Yes', 'No', '''Doesn't matter'''))
