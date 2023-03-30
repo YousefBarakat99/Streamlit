@@ -314,8 +314,8 @@ def complete():
 
     st.header('Complete application')
     st.write(f'Data updated on: {today}')
-    ml, dash = st.tabs(
-        ['Price prediction using machine learning', 'Interactive dashboard'])
+    dash, ml = st.tabs(
+        ['Interactive dashboard', 'Price prediction using machine learning'])
 
     # * DASHBOARD TAB
     with dash:
