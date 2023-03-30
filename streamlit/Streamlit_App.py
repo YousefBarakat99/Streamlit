@@ -25,14 +25,14 @@ def intro():
 
     st.markdown(
         """
-        ### Some Context
+        ### 📝 Context:
 
         This App explores the relation between price, size and number of rooms along a relatively large dataset. The data was scraped from 3 property websites in the area that I live in. The motivation behind this project was
         to try and find a solution to easily having a large excel file with properties and filtering them while having an easily accessable link that leads directly to the posting after hearing a friend who was complaining about finding a 
         property to rent because going through several website and interfaces was a waste of time.
 
         &nbsp;
-        ### Source Code:
+        ### 🖥️ Source Code:
         The source code can be found on my GitHub profile [here](https://github.com/YousefBarakat99/Streamlit/tree/main/streamlit)
 
         &nbsp;
