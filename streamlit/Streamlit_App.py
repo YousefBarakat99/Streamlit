@@ -5,7 +5,6 @@ import plotly.graph_objects as go
 # * Sending data to streamlit
 df = pd.read_excel('streamlit/Houses_Cleaned.xlsx')
 # df = pd.read_excel('Houses_Cleaned.xlsx')
-df['Address'] = df['Address'].fillna('Address unavailable')
 
 
 def create_link(url: str) -> str:
