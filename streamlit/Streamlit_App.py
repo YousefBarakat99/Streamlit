@@ -19,7 +19,8 @@ today = '2023-03-30'
 def intro():
     import streamlit as st
 
-    st.write("# Welcome to my simple WebApp 👋")
+    # st.write("# Welcome to my simple WebApp 👋")
+    st.write("# Apartment hunting made easier 🏘️")
     st.sidebar.success("Select a page above.")
 
     st.markdown(
