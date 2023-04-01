@@ -324,7 +324,7 @@ def complete():
         rentee = st.radio('Are you moving in alone or with others?',
                           ('Alone', 'With others'), key='choice')
         if rentee == 'With others':
-            num = st.number_input('How many others?', 1, 4, key='people') + 1
+            num = st.number_input('How many people in total?', 2, 6, key='people')
         else:
             num = 1
 
