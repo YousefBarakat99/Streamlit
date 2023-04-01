@@ -175,6 +175,11 @@ def price_ft():
     import plotly.express as px
 
     st.header('Filter by prices using a slider')
+    st.write('### Illustration of price distributions')
+    fig = px.histogram(df, x='Price (HUF)',
+                       color_discrete_sequence=['indianred'])
+    fig.update_traces(marker_line_width=2, marker_line_color="black")
+    st.plotly_chart(fig, use_container_width=True)
     minp, maxp = st.select_slider('Select price range (HUF)', df['Price (HUF)'].sort_values(
     ), (df['Price (HUF)'].min(), df['Price (HUF)'].max()))
     st.info(f"Your price range is {minp} HUF to {maxp} HUF")
@@ -197,11 +202,6 @@ def price_ft():
             )
         ]
     )
-    st.plotly_chart(fig, use_container_width=True)
-    st.write('### Illustration of price distributions')
-    fig = px.histogram(df1, x='Price (HUF)',
-                       color_discrete_sequence=['indianred'])
-    fig.update_traces(marker_line_width=2, marker_line_color="black")
     st.plotly_chart(fig, use_container_width=True)
 
 
