@@ -183,12 +183,6 @@ def price_ft():
     st.success(f'''There are a total of {df1["Price (HUF)"].count()} properties within that price range. 
     The average size is {df1["Size (m2)"].mean().round(1)} m2 whereas the average number of rooms 
     is {int(df1["Rooms"].mean().round())}''')
-    st.write('### Illustration of price distributions')
-    fig = px.histogram(df1, x='Price (HUF)',
-                       color_discrete_sequence=['indianred'])
-    fig.update_traces(marker_line_width=2, marker_line_color="black")
-    st.plotly_chart(fig, use_container_width=True)
-    # st.dataframe(df1)
     fig = go.Figure(
         data=[
             go.Table(
@@ -203,6 +197,11 @@ def price_ft():
             )
         ]
     )
+    st.plotly_chart(fig, use_container_width=True)
+    st.write('### Illustration of price distributions')
+    fig = px.histogram(df1, x='Price (HUF)',
+                       color_discrete_sequence=['indianred'])
+    fig.update_traces(marker_line_width=2, marker_line_color="black")
     st.plotly_chart(fig, use_container_width=True)
 
 
