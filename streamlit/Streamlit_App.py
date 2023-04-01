@@ -136,7 +136,7 @@ def rooms_ft():
     import plotly.express as px
 
     st.header('Filter by rooms')
-    rooms = st.slider('Number of rooms', ('1', '2', '3', '4', '5'))
+    rooms = st.radio('Number of rooms', ('1', '2', '3', '4', '5'))
     case = {
         '1': 1,
         '2': 2,
