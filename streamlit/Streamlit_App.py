@@ -350,13 +350,13 @@ def complete():
         #                  (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins)].sort_values(sort).reset_index(drop=True)
         # else:
         if loc == 'Yes':
-            df1 = df[(df['Rooms'] <= (num+1)) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
+            df1 = df[(df['Rooms'] == (num+1)) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
                      (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] == 'center')].sort_values(sort).reset_index(drop=True)
         elif loc == 'No':
-            df1 = df[(df['Rooms'] <= (num+1)) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
+            df1 = df[(df['Rooms'] == (num+1)) & (df['Rooms'] == (num)) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
                      (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] != 'center')].sort_values(sort).reset_index(drop=True)
         else:
-            df1 = df[(df['Rooms'] <= (num+1)) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
+            df1 = df[(df['Rooms'] == (num+1)) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
                      (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins)].sort_values(sort).reset_index(drop=True)
         if len(df1) == 0:
             st.error('There no properties that match your description.')
@@ -364,14 +364,13 @@ def complete():
             st.success(
                 f'There are a total of {df1["Price (HUF)"].count()} properties that match your description!')
             # st.dataframe(df1)
-            dfr = df1[(df1['Rooms'] == (num)) | (df1['Rooms'] == (num+1))]
             fig = go.Figure(
                 data=[
                     go.Table(
                         columnwidth=[1, 1, 0.5],
                         header=dict(
                             values=[
-                                f"<b>{i}</b>" for i in dfr.columns.to_list()],
+                                f"<b>{i}</b>" for i in df1.columns.to_list()],
                             fill_color='black'
                         ),
                         cells=dict(
