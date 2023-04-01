@@ -175,12 +175,7 @@ def price_ft():
     import plotly.express as px
 
     st.header('Filter by prices using a slider')
-    st.write()
-    st.write('### Illustration of price distributions')
-    fig = px.histogram(df, x='Price (HUF)',
-                       color_discrete_sequence=['indianred'])
-    fig.update_traces(marker_line_width=2, marker_line_color="black")
-    st.plotly_chart(fig, use_container_width=True)
+    st.write('')
     minp, maxp = st.select_slider('Select price range (HUF)', df['Price (HUF)'].sort_values(
     ), (df['Price (HUF)'].min(), df['Price (HUF)'].max()))
     st.info(f"Your price range is {minp} HUF to {maxp} HUF")
@@ -189,6 +184,11 @@ def price_ft():
     st.success(f'''There are a total of {df1["Price (HUF)"].count()} properties within that price range. 
     The average size is {df1["Size (m2)"].mean().round(1)} m2 whereas the average number of rooms 
     is {int(df1["Rooms"].mean().round())}''')
+    st.write('### Illustration of price distributions')
+    fig = px.histogram(df1, x='Price (HUF)',
+                       color_discrete_sequence=['indianred'])
+    fig.update_traces(marker_line_width=2, marker_line_color="black")
+    st.plotly_chart(fig, use_container_width=True)
     # st.dataframe(df1)
     fig = go.Figure(
         data=[
@@ -244,17 +244,6 @@ def complete():
         else:
             mins, maxs = df['Size (m2)'].dropna(
             ).min(), df['Size (m2)'].dropna().max()
-        # if (num == 5):
-        #     if loc == 'Yes':
-        #         df1 = df[(df['Rooms'] >= (num)) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
-        #                  (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] == 'center')].sort_values(sort).reset_index(drop=True)
-        #     elif loc == 'No':
-        #         df1 = df[(df['Rooms'] >= (num)) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
-        #                  (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] != 'center')].sort_values(sort).reset_index(drop=True)
-        #     else:
-        #         df1 = df[(df['Rooms'] >= (num)) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
-        #                  (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins)].sort_values(sort).reset_index(drop=True)
-        # else:
         if (num == 1) or (num == 2):
             if loc == 'Yes':
                 df1 = df[((df['Rooms'] == (num+1)) | (df['Rooms'] == (num))) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
