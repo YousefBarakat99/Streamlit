@@ -62,7 +62,7 @@ def general():
     import numpy as np
     import seaborn as sns
     import plotly.express as px
-    st.subheader('General property info')
+    st.header('General property info')
     st.write(f'Date updated: {today}')
     # st.dataframe(df.sort_values('Price (HUF)').reset_index(drop=True))
     # st.markdown(df.to_html(render_links=True),unsafe_allow_html=True)
