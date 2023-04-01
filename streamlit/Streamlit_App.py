@@ -325,7 +325,7 @@ def complete():
                           ('Alone', 'With others'), key='choice')
         if rentee == 'With others':
             num = st.number_input(
-                'How many people in total?', 2, 6, key='people')
+                'How many people in total?', 2, 5, key='people')
         else:
             num = 1
 
