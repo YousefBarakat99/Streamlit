@@ -383,7 +383,7 @@ def complete():
             if you face any issues.''')
             st.plotly_chart(fig, use_container_width=True)
             st.write(
-                '## You can find some charts and visualizations below to help you understand how the data is distributed 📊')
+                '### You can find some charts and visualizations below to help you understand how the data is distributed 📊')
             fig = px.histogram(df1, x='Rooms', color='Rooms')
             fig.update_traces(marker_line_width=2, marker_line_color="black")
             st.plotly_chart(fig, use_container_width=True)
