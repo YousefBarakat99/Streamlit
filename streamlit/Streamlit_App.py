@@ -353,7 +353,7 @@ def complete():
             df1 = df[(df['Rooms'] == (num+1)) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
                      (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] == 'center')].sort_values(sort).reset_index(drop=True)
         elif loc == 'No':
-            df1 = df[(df['Rooms'] == (num+1)) & (df['Rooms'] == (num)) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
+            df1 = df[((df['Rooms'] == (num+1)) | (df['Rooms'] == (num))) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
                      (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] != 'center')].sort_values(sort).reset_index(drop=True)
         else:
             df1 = df[(df['Rooms'] == (num+1)) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
