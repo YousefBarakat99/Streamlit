@@ -318,13 +318,13 @@ def complete():
     with ml:
         model = load('streamlit/room-count-recommender.joblib')
         # model = load('room-count-recommender.joblib')
+        st.info(
+            '''Any questions? [Contact me!](https://yousefbarakat99.github.io/website/#contact)''')
         st.write('''Enter the desired size and number of rooms below, and the machine learning algorithm will predict 
         how many rooms could fit in the property. The answer is based on all the data gathered previously.''')
         st.warning(
             '''The accuracy of this machine learning model is 98%. However, it is not a reflection 
             of what you might actually end up paying.''')
-        st.info(
-            '''Any questions? [Contact me!](https://yousefbarakat99.github.io/website/#contact)''')
         size = st.number_input(
             '''What's your desired size? (must be 20 meter square or more)''', 20, 150)
         rooms = st.number_input('How many rooms?', 1, 5)
