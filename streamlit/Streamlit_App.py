@@ -324,7 +324,8 @@ def complete():
         rentee = st.radio('Are you moving in alone or with others?',
                           ('Alone', 'With others'), key='choice')
         if rentee == 'With others':
-            num = st.number_input('How many people in total?', 2, 6, key='people')
+            num = st.number_input(
+                'How many people in total?', 2, 6, key='people')
         else:
             num = 1
 
@@ -363,13 +364,14 @@ def complete():
             st.success(
                 f'There are a total of {df1["Price (HUF)"].count()} properties that match your description!')
             # st.dataframe(df1)
+            dfr = df1[(df1['Rooms'] == (num)) | (df1['Rooms'] == (num+1))]
             fig = go.Figure(
                 data=[
                     go.Table(
                         columnwidth=[1, 1, 0.5],
                         header=dict(
                             values=[
-                                f"<b>{i}</b>" for i in df1.columns.to_list()],
+                                f"<b>{i}</b>" for i in dfr.columns.to_list()],
                             fill_color='black'
                         ),
                         cells=dict(
