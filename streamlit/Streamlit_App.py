@@ -214,7 +214,7 @@ def complete():
     from joblib import load
 
     st.header('Complete application')
-    st.write(f'Data updated on: {today}')
+    st.info(f'Data updated on: {today}')
     dash, ml = st.tabs(
         ['Interactive dashboard', 'Price prediction using machine learning'])
 
