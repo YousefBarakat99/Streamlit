@@ -135,7 +135,7 @@ def rooms_ft():
     import streamlit as st
     import plotly.express as px
 
-    st.write('Filter by rooms')
+    st.header('Filter by rooms')
     rooms = st.radio('Number of rooms', ('1', '2', '3', '>3'))
     if rooms == '1':
         # st.dataframe(df[df['Rooms'] == 2].sort_values('Price (HUF)').drop(columns='Address').reset_index(drop=True))
@@ -431,8 +431,8 @@ def complete():
 page_names_to_funcs = {
     "Introduction": intro,
     "General info": general,
-    "Filter by rooms": rooms_ft,
-    'Filter by prices': price_ft,
+    "Room distribution": rooms_ft,
+    'Price analysis': price_ft,
     'Complete Web application': complete
 }
 
