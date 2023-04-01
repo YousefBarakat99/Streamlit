@@ -175,7 +175,6 @@ def price_ft():
     import plotly.express as px
 
     st.header('Filter by prices using a slider')
-    st.write('')
     minp, maxp = st.select_slider('Select price range (HUF)', df['Price (HUF)'].sort_values(
     ), (df['Price (HUF)'].min(), df['Price (HUF)'].max()))
     st.info(f"Your price range is {minp} HUF to {maxp} HUF")
