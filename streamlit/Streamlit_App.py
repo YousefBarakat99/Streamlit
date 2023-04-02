@@ -367,7 +367,7 @@ def complete():
         if (rooms >= 1) & (size >= 20):
             pred_price = model.predict([[size, rooms]])
             st.success(
-                f'The predicted monthly rental price for an apartment with {rooms} rooms and size {size} meter square, is {int(pred_price[0].round())} HUF')
+                f'The predicted monthly rental price for an apartment with {rooms} room(s) and size {size} meter square, is {int(pred_price[0].round())} HUF')
 
 
 page_names_to_funcs = {
