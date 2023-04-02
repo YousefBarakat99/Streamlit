@@ -3,14 +3,15 @@ import pandas as pd
 import plotly.graph_objects as go
 
 # * Sending data to streamlit
-df = pd.read_excel('streamlit/Houses_Cleaned.xlsx')
-# df = pd.read_excel('Houses_Cleaned.xlsx')
+# df = pd.read_excel('streamlit/Houses_Cleaned.xlsx')
+df = pd.read_excel('Houses_Cleaned.xlsx')
 
 
 def create_link(url: str) -> str:
     return f'''<a href="{url}">🔗</a>'''
 
 
+dfm = df.copy()
 df['Link'] = [create_link(url) for url in df["Link"]]
 
 today = '2023-04-01'
@@ -66,25 +67,29 @@ def general():
     st.info(f'Date updated: {today}')
     # st.dataframe(df.sort_values('Price (HUF)').reset_index(drop=True))
     # st.markdown(df.to_html(render_links=True),unsafe_allow_html=True)
-
-    fig = go.Figure(
-        data=[
-            go.Table(
-                columnwidth=[1, 1, 0.5],
-                header=dict(
-                    values=[f"<b>{i}</b>" for i in df.columns.to_list()],
-                    fill_color='black'
-                ),
-                cells=dict(
-                    values=df.transpose()
-                )
-            )
-        ]
-    )
     st.warning('''If the links do not work, it's probably due to the data being outdated 
             and I just need to update it. Please [contact me](https://yousefbarakat99.github.io/website/#contact) 
             if you face any issues.''')
-    st.plotly_chart(fig, use_container_width=True)
+    platform = st.radio(
+        'Are you using a PC/desktop or phone/tablet?', ('PC/desktop', 'phone/tablet'))
+    if platform == 'PC/desktop':
+        fig = go.Figure(
+            data=[
+                go.Table(
+                    columnwidth=[1, 1, 0.5],
+                    header=dict(
+                        values=[f"<b>{i}</b>" for i in df.columns.to_list()],
+                        fill_color='black'
+                    ),
+                    cells=dict(
+                        values=df.transpose()
+                    )
+                )
+            ]
+        )
+        st.plotly_chart(fig, use_container_width=True)
+    else:
+        st.dataframe(dfm)
     count = df['Price (HUF)'].count()
     ravg = int(np.mean(df['Rooms']).round())
     savg = int(np.mean(df['Size (m2)']))
@@ -146,23 +151,30 @@ def rooms_ft():
     }
 
     room_count = case[rooms]
-    df1 = df[(df['Rooms'] == room_count) & (df['Size (m2)'].notna()) & (
-        df['Price (HUF)'].notna())].sort_values('Price (HUF)').reset_index(drop=True)
-    fig = go.Figure(
-        data=[
-            go.Table(
-                columnwidth=[1, 1, 0.5],
-                header=dict(
-                    values=[f"<b>{i}</b>" for i in df1.columns.to_list()],
-                    fill_color='black'
-                ),
-                cells=dict(
-                    values=df1.transpose()
+    platform = st.radio(
+        'Are you using a PC/desktop or phone/tablet?', ('PC/desktop', 'phone/tablet'))
+    if platform == 'PC/desktop':
+        df1 = df[(df['Rooms'] == room_count) & (df['Size (m2)'].notna()) & (
+            df['Price (HUF)'].notna())].sort_values('Price (HUF)').reset_index(drop=True)
+        fig = go.Figure(
+            data=[
+                go.Table(
+                    columnwidth=[1, 1, 0.5],
+                    header=dict(
+                        values=[f"<b>{i}</b>" for i in df1.columns.to_list()],
+                        fill_color='black'
+                    ),
+                    cells=dict(
+                        values=df1.transpose()
+                    )
                 )
-            )
-        ]
-    )
-    st.plotly_chart(fig, use_container_width=True)
+            ]
+        )
+        st.plotly_chart(fig, use_container_width=True)
+    else:
+        df1 = dfm[(df['Rooms'] == room_count) & (df['Size (m2)'].notna()) & (
+            df['Price (HUF)'].notna())].sort_values('Price (HUF)').reset_index(drop=True)
+        st.dataframe(df1)
     st.success(
         f'There are {len(df1)} properties with just {room_count} room(s) and the average price is {int(df1["Price (HUF)"].mean())} HUF.')
     fig = px.line(df1, x='Price (HUF)', y='Size (m2)',
@@ -183,26 +195,36 @@ def price_ft():
     minp, maxp = st.select_slider('Select price range (HUF)', df['Price (HUF)'].sort_values(
     ), (df['Price (HUF)'].min(), df['Price (HUF)'].max()))
     st.info(f"Your price range is {minp} HUF to {maxp} HUF")
-    df1 = df[(df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp)].sort_values(
-        'Price (HUF)').drop(columns='Address').reset_index(drop=True)
-    st.success(f'''There are a total of {df1["Price (HUF)"].count()} properties within that price range. 
+    platform = st.radio(
+        'Are you using a PC/desktop or phone/tablet?', ('PC/desktop', 'phone/tablet'))
+    if platform == 'PC/desktop':
+        df1 = df[(df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp)].sort_values(
+            'Price (HUF)').drop(columns='Address').reset_index(drop=True)
+        st.success(f'''There are a total of {df1["Price (HUF)"].count()} properties within that price range. 
     The average size is {df1["Size (m2)"].mean().round(1)} m2 whereas the average number of rooms 
     is {int(df1["Rooms"].mean().round())}''')
-    fig = go.Figure(
-        data=[
-            go.Table(
-                columnwidth=[1, 1, 0.5],
-                header=dict(
-                    values=[f"<b>{i}</b>" for i in df1.columns.to_list()],
-                    fill_color='black'
-                ),
-                cells=dict(
-                    values=df1.transpose()
+        fig = go.Figure(
+            data=[
+                go.Table(
+                    columnwidth=[1, 1, 0.5],
+                    header=dict(
+                        values=[f"<b>{i}</b>" for i in df1.columns.to_list()],
+                        fill_color='black'
+                    ),
+                    cells=dict(
+                        values=df1.transpose()
+                    )
                 )
-            )
-        ]
-    )
-    st.plotly_chart(fig, use_container_width=True)
+            ]
+        )
+        st.plotly_chart(fig, use_container_width=True)
+    else:
+        df1 = dfm[(df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp)].sort_values(
+            'Price (HUF)').drop(columns='Address').reset_index(drop=True)
+        st.success(f'''There are a total of {df1["Price (HUF)"].count()} properties within that price range. 
+    The average size is {df1["Size (m2)"].mean().round(1)} m2 whereas the average number of rooms 
+    is {int(df1["Rooms"].mean().round())}''')
+        st.dataframe(df1)
 
 
 def complete():
@@ -242,63 +264,90 @@ def complete():
         else:
             mins, maxs = df['Size (m2)'].dropna(
             ).min(), df['Size (m2)'].dropna().max()
-        if (num == 1) or (num == 2):
-            if loc == 'Yes':
-                df1 = df[((df['Rooms'] == (num+1)) | (df['Rooms'] == (num))) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
-                         (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] == 'center')].sort_values(sort).reset_index(drop=True)
-            elif loc == 'No':
-                df1 = df[((df['Rooms'] == (num+1)) | (df['Rooms'] == (num))) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
-                         (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] != 'center')].sort_values(sort).reset_index(drop=True)
+        platform = st.radio(
+            'Are you using a PC/desktop or phone/tablet?', ('PC/desktop', 'phone/tablet'))
+        if platform == 'PC/desktop':
+            if (num == 1) or (num == 2):
+                if loc == 'Yes':
+                    df1 = df[((df['Rooms'] == (num+1)) | (df['Rooms'] == (num))) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
+                             (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] == 'center')].sort_values(sort).reset_index(drop=True)
+                elif loc == 'No':
+                    df1 = df[((df['Rooms'] == (num+1)) | (df['Rooms'] == (num))) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
+                             (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] != 'center')].sort_values(sort).reset_index(drop=True)
+                else:
+                    df1 = df[((df['Rooms'] == (num+1)) | (df['Rooms'] == (num))) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
+                             (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins)].sort_values(sort).reset_index(drop=True)
             else:
-                df1 = df[((df['Rooms'] == (num+1)) | (df['Rooms'] == (num))) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
-                         (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins)].sort_values(sort).reset_index(drop=True)
+                if loc == 'Yes':
+                    df1 = df[((df['Rooms'] == (num+1)) | (df['Rooms'] == (num)) | (df['Rooms'] == (num-1))) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
+                             (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] == 'center')].sort_values(sort).reset_index(drop=True)
+                elif loc == 'No':
+                    df1 = df[((df['Rooms'] == (num+1)) | (df['Rooms'] == (num)) | (df['Rooms'] == (num-1))) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
+                             (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] != 'center')].sort_values(sort).reset_index(drop=True)
+                else:
+                    df1 = df[((df['Rooms'] == (num+1)) | (df['Rooms'] == (num)) | (df['Rooms'] == (num-1))) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
+                             (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins)].sort_values(sort).reset_index(drop=True)
         else:
-            if loc == 'Yes':
-                df1 = df[((df['Rooms'] == (num+1)) | (df['Rooms'] == (num)) | (df['Rooms'] == (num-1))) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
-                         (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] == 'center')].sort_values(sort).reset_index(drop=True)
-            elif loc == 'No':
-                df1 = df[((df['Rooms'] == (num+1)) | (df['Rooms'] == (num)) | (df['Rooms'] == (num-1))) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
-                         (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] != 'center')].sort_values(sort).reset_index(drop=True)
+            if (num == 1) or (num == 2):
+                if loc == 'Yes':
+                    df1 = dfm[((df['Rooms'] == (num+1)) | (df['Rooms'] == (num))) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
+                              (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] == 'center')].sort_values(sort).reset_index(drop=True)
+                elif loc == 'No':
+                    df1 = dfm[((df['Rooms'] == (num+1)) | (df['Rooms'] == (num))) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
+                              (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] != 'center')].sort_values(sort).reset_index(drop=True)
+                else:
+                    df1 = dfm[((df['Rooms'] == (num+1)) | (df['Rooms'] == (num))) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
+                              (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins)].sort_values(sort).reset_index(drop=True)
             else:
-                df1 = df[((df['Rooms'] == (num+1)) | (df['Rooms'] == (num)) | (df['Rooms'] == (num-1))) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
-                         (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins)].sort_values(sort).reset_index(drop=True)
+                if loc == 'Yes':
+                    df1 = dfm[((df['Rooms'] == (num+1)) | (df['Rooms'] == (num)) | (df['Rooms'] == (num-1))) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
+                              (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] == 'center')].sort_values(sort).reset_index(drop=True)
+                elif loc == 'No':
+                    df1 = dfm[((df['Rooms'] == (num+1)) | (df['Rooms'] == (num)) | (df['Rooms'] == (num-1))) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
+                              (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins) & (df['Area'] != 'center')].sort_values(sort).reset_index(drop=True)
+                else:
+                    df1 = dfm[((df['Rooms'] == (num+1)) | (df['Rooms'] == (num)) | (df['Rooms'] == (num-1))) & (df['Price (HUF)'] <= maxp) & (df['Price (HUF)'] >= minp) &
+                              (df['Size (m2)'] <= maxs) & (df['Size (m2)'] >= mins)].sort_values(sort).reset_index(drop=True)
         if len(df1) == 0:
             st.error('There no properties that match your description.')
         else:
             st.success(
                 f'There are a total of {df1["Price (HUF)"].count()} properties that match your description!')
-            # st.dataframe(df1)
-            fig = go.Figure(
-                data=[
-                    go.Table(
-                        columnwidth=[1, 1, 0.5],
-                        header=dict(
-                            values=[
-                                f"<b>{i}</b>" for i in df1.columns.to_list()],
-                            fill_color='black'
-                        ),
-                        cells=dict(
-                            values=df1.transpose()
+            if platform == 'PC/desktop':
+                fig = go.Figure(
+                    data=[
+                        go.Table(
+                            columnwidth=[1, 1, 0.5],
+                            header=dict(
+                                values=[
+                                    f"<b>{i}</b>" for i in df1.columns.to_list()],
+                                fill_color='black'
+                            ),
+                            cells=dict(
+                                values=df1.transpose()
+                            )
                         )
-                    )
-                ]
-            )
-            st.plotly_chart(fig, use_container_width=True)
+                    ]
+                )
+                st.plotly_chart(fig, use_container_width=True)
+            else:
+                st.dataframe(df1)
             st.warning('''If the links above do not work, it's probably due to the data being outdated 
             and I just need to update it. Please [contact me](https://yousefbarakat99.github.io/website/#contact) 
             if you face any issues.''')
             st.write(
                 '''### You can find some charts and visualizations below to help you understand how the data is distributed 📊:''')
             st.info('Note: They change as the above filters change!')
-            fig = px.histogram(df1, x='Rooms', color='Rooms')
+            fig = px.histogram(df1, x='Rooms', color='Rooms',
+                               title='Room frequency')
             fig.update_traces(marker_line_width=2, marker_line_color="black")
             st.plotly_chart(fig, use_container_width=True)
             fig = px.histogram(df1, x='Price (HUF)',
-                               color_discrete_sequence=['turquoise'])
+                               color_discrete_sequence=['turquoise'], title='Price distribution')
             fig.update_traces(marker_line_width=2, marker_line_color="black")
             st.plotly_chart(fig, use_container_width=True)
             fig1 = px.line(df1, x='Price (HUF)', y='Size (m2)',
-                           title='Price change according to Size')
+                           title='Price change with relation to Size')
             st.plotly_chart(fig1, use_container_width=True)
 
     # * FOR ML TAB
