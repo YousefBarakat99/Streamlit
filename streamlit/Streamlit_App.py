@@ -28,7 +28,7 @@ def intro():
         """
         ### 📝 Context:
 
-        This App explores the relation between price, size and number of rooms along a relatively large dataset. The data was scraped from 3 property websites in the area that I live in. The motivation behind this project was to try and find a solution to easily having a large excel file with properties and filtering them while having an easily accessable link that leads directly to the posting.
+        This App explores the relation between price, size and number of rooms along a relatively large dataset. The data was scraped from 3 property websites in the area that I live in. The aim of this project was to try and ease the apartment hunting process. I did this by placing the data into an excel sheet and hosting it here. You can directly visit each property page by clicking the relevant link.
 
         &nbsp;
         ### 🖥️ Source Code:
