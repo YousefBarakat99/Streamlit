@@ -116,7 +116,7 @@ def general():
         dfc = df[df['Area'] != 'unknown']
         dfc['Area'] = dfc['Area'].astype('category').cat.codes
         corr = dfc.corr(numeric_only=True).round(2)
-        st.write('''One might think there would be a strong correlation between 
+        st.write('''You might think there would be a strong correlation between 
         price and size but it seems that the market does not reflect this correlation. Perhaps another correlation
         could be between the price and the location of the property. We can examine that possible relation using
         a heatmap below.''')
