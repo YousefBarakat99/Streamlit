@@ -14,7 +14,7 @@ def create_link(url: str) -> str:
 dfm = df.copy()
 df['Link'] = [create_link(url) for url in df["Link"]]
 
-today = '2023-04-01'
+today = '2023-04-04'
 
 
 def intro():
@@ -28,7 +28,7 @@ def intro():
         """
         ### 📝 Context:
 
-        This App explores the relation between price, size and number of rooms along a relatively large dataset. The data was scraped from 3 property websites in the area that I live in. The aim of this project was to try and ease the apartment hunting process. I did this by placing the data into an excel sheet and hosting it here. You can directly visit each property page by clicking the relevant link.
+        This App explores the relation between price, size and number of rooms along a relatively large dataset. The data was scraped from 3 property websites in the area that I live in. The motivation behind this project was to try and find a solution to easily having a large excel file with properties and filtering them while having an easily accessable link that leads directly to the posting.
 
         &nbsp;
         ### 🖥️ Source Code:
@@ -65,8 +65,6 @@ def general():
     import plotly.express as px
     st.header('General property info')
     st.info(f'Date updated: {today}')
-    # st.dataframe(df.sort_values('Price (HUF)').reset_index(drop=True))
-    # st.markdown(df.to_html(render_links=True),unsafe_allow_html=True)
     st.warning('''If the links do not work, it's probably due to the data being outdated 
             and I just need to update it. Please [contact me](https://yousefbarakat99.github.io/website/#contact) 
             if you face any issues.''')
@@ -363,11 +361,11 @@ def complete():
             of what you might actually end up paying.''')
         size = st.number_input(
             '''What's your desired size? (must be 20 meter square or more)''', 20, 150)
-        rooms = st.slider('How many rooms?', 1, 5)
+        rooms = st.number_input('How many rooms?', 1, 5)
         if (rooms >= 1) & (size >= 20):
             pred_price = model.predict([[size, rooms]])
             st.success(
-                f'The predicted monthly rental price for an apartment with {rooms} room(s) and size {size} meter square, is {int(pred_price[0].round())} HUF')
+                f'Predicted monthly rental price of property for an apartment with {rooms} rooms and size {size} meter square, is {int(pred_price[0].round())} HUF')
 
 
 page_names_to_funcs = {
