@@ -70,6 +70,12 @@ def general():
             if you face any issues.''')
     platform = st.radio(
         'Are you using a PC/desktop or phone/tablet?', ('PC/desktop', 'phone/tablet'))
+    count = df['Price (HUF)'].count()
+    ravg = int(np.mean(df['Rooms']).round())
+    savg = int(np.mean(df['Size (m2)']))
+    pavg = int(np.mean(df['Price (HUF)']))
+    st.success(f'''There is a total of {count} properties gathered across 3 websites. The average number of rooms is {ravg},
+     the average size is {savg} m2 and the average rent price is {pavg} HUF per month.''')
     if platform == 'PC/desktop':
         fig = go.Figure(
             data=[
@@ -88,14 +94,8 @@ def general():
         st.plotly_chart(fig, use_container_width=True)
     else:
         st.dataframe(dfm)
-    count = df['Price (HUF)'].count()
-    ravg = int(np.mean(df['Rooms']).round())
-    savg = int(np.mean(df['Size (m2)']))
-    pavg = int(np.mean(df['Price (HUF)']))
-    st.success(f'''There is a total of {count} properties gathered across 3 websites. The average number of rooms is {ravg},
-     the average size is {savg} m2 and the average rent price is {pavg} HUF per month.''')
-    st.write('')
-    st.write('')
+    # st.write('')
+    # st.write('')
     st.write('### Choose a tab from below.')
     tab1, tab2 = st.tabs(['Room count', 'Feature correlation'])
     with tab1:
