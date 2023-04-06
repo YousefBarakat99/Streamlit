@@ -14,7 +14,7 @@ def create_link(url: str) -> str:
 dfm = df.copy()
 df['Link'] = [create_link(url) for url in df["Link"]]
 
-today = '2023-04-04'
+today = '2023-04-06'
 
 
 def intro():
@@ -73,7 +73,7 @@ def general():
     count = df['Price (HUF)'].count()
     ravg = int(np.mean(df['Rooms']).round())
     savg = int(np.mean(df['Size (m2)']))
-    pavg = int(np.mean(df[df['Price (HUF)'] <= 450_000]['Price (HUF)']))
+    pavg = int(np.mean(df['Price (HUF)']))
     st.success(f'''There is a total of {count} properties gathered across 3 websites. The average number of rooms is {ravg},
      the average size is {savg} m2 and the average rent price is {pavg} HUF per month.''')
     if platform == 'PC/desktop':
