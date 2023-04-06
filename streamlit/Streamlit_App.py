@@ -237,7 +237,7 @@ def complete():
     st.header('Complete application')
     st.info(
         '''For information regarding this app and the author, please navigate to the introduction page on the left side of the screen.
-        For information regarding the data itself, please navigate to the generral info page on the left side of the screen. 
+        For information regarding the data itself, please navigate to the general info page on the left side of the screen. 
         ''')
     dash, ml = st.tabs(
         ['Interactive dashboard', 'Price prediction using machine learning'])
