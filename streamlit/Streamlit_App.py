@@ -63,8 +63,8 @@ def general():
     import numpy as np
     import seaborn as sns
     import plotly.express as px
-    st.header('General property info')
-    st.info(f'Date updated: {today}')
+    st.header('General property information')
+    st.info(f'Latest update: {today}')
     st.warning('''If the links do not work, it's probably due to the data being outdated 
             and I just need to update it. Please [contact me](https://yousefbarakat99.github.io/website/#contact) 
             if you face any issues.''')
@@ -233,8 +233,12 @@ def complete():
     from sklearn.metrics import r2_score
     from joblib import load
 
+    st.info(f'Latest update: {today}')
     st.header('Complete application')
-    st.info(f'Data updated on: {today}')
+    st.info(
+        '''For information regarding this app and the author, please navigate to the introduction page on the left side of the screen.
+        For information regarding the data itself, please navigate to the generral info page on the left side of the screen. 
+        ''')
     dash, ml = st.tabs(
         ['Interactive dashboard', 'Price prediction using machine learning'])
 
@@ -369,11 +373,11 @@ def complete():
 
 
 page_names_to_funcs = {
+    'Complete Web application': complete,
     "Introduction": intro,
     "General info": general,
     "Room distribution": rooms_ft,
-    'Price analysis': price_ft,
-    'Complete Web application': complete
+    'Price analysis': price_ft
 }
 
 # demo_name = st.sidebar.selectbox("Choose a page", page_names_to_funcs.keys())
