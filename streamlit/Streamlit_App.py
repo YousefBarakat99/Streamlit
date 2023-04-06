@@ -127,7 +127,7 @@ def general():
         st.plotly_chart(fig, use_container_width=True)
         st.write('''As you can see above, there doesn't seem to be any correlation whatsoever between the location 
             of the property and it's price. Which might mean that the property market in Debrecen does not follow 
-            any obvious relation or direction.''')
+            any visible trend.''')
         sns.set_palette('bright')
         sns.set_style('dark')
         fig1 = sns.pairplot(dfc)
