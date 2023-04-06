@@ -108,8 +108,8 @@ def general():
         fig.update_traces(marker_line_width=2, marker_line_color="black")
         rooms_dict = list(df['Rooms'].value_counts().to_dict())
         st.write(f'''The most common number of rooms amongst properties is {rooms_dict[0]}, followed by {rooms_dict[1]} then by {rooms_dict[2]}. 
-        This can be due to the fact that not all websites or agents count rooms in the same way.
-        Some may count living rooms as bedrooms while others may count in a different way.''')
+        This can be due to the fact that not all websites or agents count rooms in the same way, 
+        some may count living rooms as bedrooms while others may count in a different way.''')
         st.plotly_chart(fig, use_container_width=True)
         # st.pyplot(fig)
     with tab2:
