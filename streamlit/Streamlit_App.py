@@ -235,7 +235,7 @@ def complete():
 
     st.info(f'Latest update: {today}')
     st.header('Complete application')
-    st.info(
+    st.write(
         '''For information regarding this app and the author, please navigate to the "About" page on the left side of the screen.
         For information regarding the data itself, please navigate to the "General info" page on the left side of the screen. 
         ''')
