@@ -14,7 +14,7 @@ def create_link(url: str) -> str:
 dfm = df.copy()
 df['Link'] = [create_link(url) for url in df["Link"]]
 
-today = '2023-04-11'
+today = '2023-04-13'
 
 
 def intro():
@@ -22,7 +22,6 @@ def intro():
 
     # st.write("# Welcome to my simple WebApp 👋")
     st.write("# Apartment hunting made easier 🏘️")
-    st.sidebar.success("Select a page above.")
 
     st.markdown(
         """
@@ -64,6 +63,7 @@ def general():
     import seaborn as sns
     import plotly.express as px
     st.header('General property information')
+    st.sidebar.success("Select a page above.")
     st.info(f'Latest update: {today}')
     st.warning('''If the links do not work, it's probably due to the data being outdated 
             and I just need to update it. Please [contact me](https://yousefbarakat99.github.io/website/#contact) 
