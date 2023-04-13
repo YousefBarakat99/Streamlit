@@ -63,7 +63,6 @@ def general():
     import seaborn as sns
     import plotly.express as px
     st.header('General property information')
-    st.sidebar.success("Select a page above.")
     st.info(f'Latest update: {today}')
     st.warning('''If the links do not work, it's probably due to the data being outdated 
             and I just need to update it. Please [contact me](https://yousefbarakat99.github.io/website/#contact) 
@@ -233,6 +232,7 @@ def complete():
     from sklearn.metrics import r2_score
     from joblib import load
 
+    st.sidebar.success("Select a page above.")
     st.info(f'Latest update: {today}')
     st.header('Complete application')
     st.write(
