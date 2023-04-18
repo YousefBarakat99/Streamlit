@@ -14,7 +14,7 @@ def create_link(url: str) -> str:
 dfm = df.copy()
 df['Link'] = [create_link(url) for url in df["Link"]]
 
-today = '2023-04-13'
+today = '2023-04-18'
 
 
 def intro():
