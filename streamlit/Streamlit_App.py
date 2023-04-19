@@ -1,3 +1,4 @@
+import datetime
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
@@ -17,13 +18,12 @@ dfm = df.copy()
 df['Link'] = [create_link(url) for url in df["Link"]]
 
 today = '2023-04-18'
-
 client = create_client(supabase_url='https://ypbzrttvfujxlohopimv.supabase.co',
                        supabase_key='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlwYnpydHR2ZnVqeGxvaG9waW12Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODE4NjUzNDgsImV4cCI6MTk5NzQ0MTM0OH0.bbIRbu4xaCuxae0YewBcC0IwWlpQtoobqZEte1KjE2k')
 
 
 def add_rating(rating, unique_id):
-    data = {'rating': rating, 'id': unique_id}
+    data = {'rating': rating, 'id': unique_id, 'date': datetime.date.today()}
     client.from_('ratings').insert([data]).execute()
 
 
