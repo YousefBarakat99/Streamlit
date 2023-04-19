@@ -22,10 +22,11 @@ client = create_client(supabase_url='https://ypbzrttvfujxlohopimv.supabase.co',
                        supabase_key='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlwYnpydHR2ZnVqeGxvaG9waW12Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODE4NjUzNDgsImV4cCI6MTk5NzQ0MTM0OH0.bbIRbu4xaCuxae0YewBcC0IwWlpQtoobqZEte1KjE2k')
 
 
-def add_rating(rating, unique_id):
-    from datetime import date
-    today = date.today().strftime('%Y-%m-%d')
-    data = {'rating': rating, 'id': unique_id, 'date': today}
+def add_rating(rating, unique_id, comment):
+    from datetime import datetime
+    today = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    data = {'rating': rating, 'id': unique_id,
+            'date': today, 'comment': comment}
     client.from_('ratings').insert([data]).execute()
 
 
@@ -255,10 +256,11 @@ def complete():
         ''')
     stars = st_star_rating("Please rate this Web App!",
                            maxValue=5, defaultValue=0, key="rating")
+    comment = st.text_area('Please leave a comment!')
     submit = st.button('Submit rating')
     if submit:
         unique_id = str(uuid.uuid4())
-        add_rating(stars, unique_id)
+        add_rating(stars, unique_id, comment)
         st.success('Thank you for your feedback!')
 
     dash, ml = st.tabs(
