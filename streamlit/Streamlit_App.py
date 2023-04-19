@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
+import json
 
 # * Sending data to streamlit
 df = pd.read_excel('streamlit/Houses_Cleaned.xlsx')
@@ -15,6 +16,14 @@ dfm = df.copy()
 df['Link'] = [create_link(url) for url in df["Link"]]
 
 today = '2023-04-18'
+
+
+def add_rating(rating, unique_id):
+    with open('streamlit/ratings.json', 'r+') as f:
+        data = json.load(f)
+        data['ratings'].append({'rating': rating, 'id': unique_id})
+        f.seek(0)
+        json.dump(data, f)
 
 
 def intro():
@@ -231,6 +240,8 @@ def complete():
     from sklearn.ensemble import RandomForestRegressor
     from sklearn.metrics import r2_score
     from joblib import load
+    from streamlit_star_rating import st_star_rating
+    import uuid
 
     st.sidebar.success("Select a page above.")
     st.info(f'Latest update: {today}')
@@ -239,6 +250,13 @@ def complete():
         '''For information regarding this app and the author, please navigate to the "About" page on the left side of the screen.
         For information regarding the data itself, please navigate to the "General info" page on the left side of the screen. 
         ''')
+    stars = st_star_rating("Please rate this Web App!",
+                           maxValue=5, defaultValue=0, key="rating")
+    submit = st.button('Submit rating')
+    if submit:
+        unique_id = str(uuid.uuid4())
+        add_rating(stars, unique_id)
+
     dash, ml = st.tabs(
         ['Interactive dashboard', 'Price prediction using machine learning'])
 
