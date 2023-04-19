@@ -256,6 +256,7 @@ def complete():
     if submit:
         unique_id = str(uuid.uuid4())
         add_rating(stars, unique_id)
+        st.write('Thank you for your feedback!')
 
     dash, ml = st.tabs(
         ['Interactive dashboard', 'Price prediction using machine learning'])
