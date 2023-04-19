@@ -1,7 +1,8 @@
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
-import json
+import os
+from supabase import create_client
 
 # * Sending data to streamlit
 df = pd.read_excel('streamlit/Houses_Cleaned.xlsx')
@@ -17,13 +18,13 @@ df['Link'] = [create_link(url) for url in df["Link"]]
 
 today = '2023-04-18'
 
+client = create_client(supabase_url='https://ypbzrttvfujxlohopimv.supabase.co',
+                       supabase_key='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlwYnpydHR2ZnVqeGxvaG9waW12Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODE4NjUzNDgsImV4cCI6MTk5NzQ0MTM0OH0.bbIRbu4xaCuxae0YewBcC0IwWlpQtoobqZEte1KjE2k')
+
 
 def add_rating(rating, unique_id):
-    with open('streamlit/ratings.json', 'r+') as f:
-        data = json.load(f)
-        data['ratings'].append({'rating': rating, 'id': unique_id})
-        f.seek(0)
-        json.dump(data, f)
+    data = {'rating': rating, 'id': unique_id}
+    client.from_('ratings').insert([data]).execute()
 
 
 def intro():
