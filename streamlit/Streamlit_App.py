@@ -19,7 +19,7 @@ today = '2023-04-18'
 
 
 def add_rating(rating, unique_id):
-    with open('ratings.json', 'r+') as f:
+    with open('streamlit/ratings.json', 'r+') as f:
         data = json.load(f)
         data['ratings'].append({'rating': rating, 'id': unique_id})
         f.seek(0)
