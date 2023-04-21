@@ -264,7 +264,7 @@ def complete():
         st.success('Thank you for your feedback!')
 
     dash, ml = st.tabs(
-        ['Interactive dashboard', 'Price prediction using machine learning'])
+        ['Filter results', 'Price prediction using machine learning'])
 
     # * DASHBOARD TAB
     with dash:
