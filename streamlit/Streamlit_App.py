@@ -254,7 +254,7 @@ def complete():
         For information regarding the data itself, please navigate to the "General info" page on the left side of the screen. 
         ''')
     stars = st_star_rating("Please rate this Web App!",
-                           maxValue=5, defaultValue=0, key="rating")
+                           maxValue=5, defaultValue=5, key="rating")
     comment = st.text_area('Can you provide some feedback?')
     submit = st.button('Submit rating')
     if submit:
