@@ -290,7 +290,7 @@ def complete():
             mins, maxs = df['Size (m2)'].dropna(
             ).min(), df['Size (m2)'].dropna().max()
         platform = st.radio(
-            'Are you using a PC/desktop or phone/tablet?', ('PC/desktop', 'phone/tablet'))
+            "Please select the device you are using to view the results (It's important so you can use the links)", ('PC/desktop', 'phone/tablet'))
         if platform == 'PC/desktop':
             if (num == 1) or (num == 2):
                 if loc == 'Yes':
