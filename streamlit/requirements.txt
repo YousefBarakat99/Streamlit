@@ -79,7 +79,7 @@ numpy==1.24.1
 openpyxl==3.0.10
 outcome==1.2.0
 packaging==22.0
-pandas==3.1.0
+pandas==1.5.2
 pandas-profiling==3.2.0
 pandocfilters==1.5.0
 parso==0.8.3
@@ -132,7 +132,7 @@ soupsieve==2.3.2.post1
 sqlparse==0.4.3
 st-star-rating==0.0.3
 stack-data==0.6.2
-streamlit==1.17.0
+streamlit==3.1.0
 StrEnum==0.4.10
 supabase==1.0.3
 supafunc==0.2.2
