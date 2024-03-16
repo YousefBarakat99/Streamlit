@@ -181,9 +181,9 @@ def rooms_ft():
     else:
         df1 = dfm[(df['Rooms'] == room_count) & (df['Size (m2)'].notna()) & (
             df['Price (HUF)'].notna())].sort_values('Price (HUF)').reset_index(drop=True)
-        st.dataframe(df1)
     st.success(
         f'There are {len(df1)} properties with just {room_count} room(s) and the average price is {int(df1["Price (HUF)"].mean())} HUF.')
+    st.dataframe(df1)
     fig = px.line(df1, x='Price (HUF)', y='Size (m2)',
                   title='Price change according to Size')
     st.plotly_chart(fig, use_container_width=True)
