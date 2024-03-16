@@ -1,8 +1,6 @@
-import datetime
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
-import os
 from supabase import create_client
 
 # * Sending data to streamlit
@@ -239,12 +237,6 @@ def price_ft():
 def complete():
     import streamlit as st
     import plotly.express as px
-    from sklearn.model_selection import train_test_split
-    from sklearn.ensemble import RandomForestRegressor
-    from sklearn.metrics import r2_score
-    from joblib import load
-    from streamlit_star_rating import st_star_rating
-    import uuid
 
     st.sidebar.success("Select a page above.")
     st.info(f'Latest update: {today}')
@@ -253,17 +245,16 @@ def complete():
         '''For information regarding this app and the author, please navigate to the "About" page on the left side of the screen.
         For information regarding the data itself, please navigate to the "General info" page on the left side of the screen. 
         ''')
-    stars = st_star_rating("Please rate this Web App!",
-                           maxValue=5, defaultValue=5, key="rating")
-    comment = st.text_area('Can you provide some feedback?')
-    submit = st.button('Submit rating')
-    if submit:
-        unique_id = str(uuid.uuid4())
-        add_rating(stars, unique_id, comment)
-        st.success('Thank you for your feedback!')
-
+    # stars = st_star_rating("Please rate this Web App!",
+    #                        maxValue=5, defaultValue=5, key="rating")
+    # comment = st.text_area('Can you provide some feedback?')
+    # submit = st.button('Submit rating')
+    # if submit:
+    #     unique_id = str(uuid.uuid4())
+    #     add_rating(stars, unique_id, comment)
+    #     st.success('Thank you for your feedback!')
     dash, ml = st.tabs(
-        ['Filter results', 'Price prediction using machine learning'])
+        ['Filter results'])
 
     # * DASHBOARD TAB
     with dash:
@@ -376,23 +367,23 @@ def complete():
             st.plotly_chart(fig1, use_container_width=True)
 
     # * FOR ML TAB
-    with ml:
-        model = load('streamlit/room-count-recommender.joblib')
-        # model = load('room-count-recommender.joblib')
-        st.info(
-            '''Any questions? [Contact me!](https://yousefbarakat99.github.io/website/#contact)''')
-        st.write('''Enter the desired size and number of rooms below, and the machine learning algorithm will predict the 
-            price of the property.''')
-        st.warning(
-            '''The accuracy of this machine learning model is 98%. However, it is not a reflection 
-            of what you might actually end up paying.''')
-        size = st.number_input(
-            '''What's your desired size? (must be 20 meter square or more)''', 20, 150)
-        rooms = st.number_input('How many rooms?', 1, 5)
-        if (rooms >= 1) & (size >= 20):
-            pred_price = model.predict([[size, rooms]])
-            st.success(
-                f'Predicted monthly rental price of property for an apartment with {rooms} rooms and size {size} meter square, is {int(pred_price[0].round())} HUF')
+    # with ml:
+    #     model = load('streamlit/room-count-recommender.joblib')
+    #     # model = load('room-count-recommender.joblib')
+    #     st.info(
+    #         '''Any questions? [Contact me!](https://yousefbarakat99.github.io/website/#contact)''')
+    #     st.write('''Enter the desired size and number of rooms below, and the machine learning algorithm will predict the 
+    #         price of the property.''')
+    #     st.warning(
+    #         '''The accuracy of this machine learning model is 98%. However, it is not a reflection 
+    #         of what you might actually end up paying.''')
+    #     size = st.number_input(
+    #         '''What's your desired size? (must be 20 meter square or more)''', 20, 150)
+    #     rooms = st.number_input('How many rooms?', 1, 5)
+    #     if (rooms >= 1) & (size >= 20):
+    #         pred_price = model.predict([[size, rooms]])
+    #         st.success(
+    #             f'Predicted monthly rental price of property for an apartment with {rooms} rooms and size {size} meter square, is {int(pred_price[0].round())} HUF')
 
 
 page_names_to_funcs = {
