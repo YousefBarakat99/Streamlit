@@ -253,7 +253,7 @@ def complete():
     #     unique_id = str(uuid.uuid4())
     #     add_rating(stars, unique_id, comment)
     #     st.success('Thank you for your feedback!')
-    dash, ml = st.tabs(
+    dash = st.tabs(
         ['Filter results'])
 
     # * DASHBOARD TAB
