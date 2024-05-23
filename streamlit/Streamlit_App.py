@@ -14,7 +14,7 @@ def create_link(url: str) -> str:
 dfm = df.copy()
 df['Link'] = [create_link(url) for url in df["Link"]]
 
-today = '2024-03-26'
+today = '2024-05-23'
 client = create_client(supabase_url='https://ypbzrttvfujxlohopimv.supabase.co',
                        supabase_key='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlwYnpydHR2ZnVqeGxvaG9waW12Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODE4NjUzNDgsImV4cCI6MTk5NzQ0MTM0OH0.bbIRbu4xaCuxae0YewBcC0IwWlpQtoobqZEte1KjE2k')
 
